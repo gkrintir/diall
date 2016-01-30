@@ -139,7 +139,7 @@ Bool_t hiEventProducer::Run(Long64_t entry) {
   fhiEventContainer->SetRun(fRun);
   fhiEventContainer->SetEvent(fEvt);
   fhiEventContainer->SetLumi(fLumi);
-  fhiEventContainer->SetWeight(fWeight);
+  fhiEventContainer->SetWeight(fWeight); printf(" weight %f\n", fWeight);
   fhiEventContainer->SetVx(fVx);
   fhiEventContainer->SetVy(fVy);
   fhiEventContainer->SetVz(fVz);

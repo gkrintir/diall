@@ -50,7 +50,7 @@ for n in xrange(1,opt.jobs+1):
     scriptFile.write('cd -\n')
     scriptFile.write('cp %s/ExampleAnalysisParameters_cfg.py .\n' % jobsBase)
     #scriptFile.write('runTtbarEMuData5TeV ExampleAnalysisParameters_cfg.py %d %d\n' % ((n-1)*opt.files,(n-1)*opt.files+opt.files))
-    scriptFile.write('runTtbarEMuData5TeV ExampleAnalysisParameters_cfg.py %d %d %d\n' % ((1-1)*opt.files, (1-1)*opt.files+opt.files, (n-1)*opt.nevts ))
+    scriptFile.write('runTtbarDilepton5TeV ExampleAnalysisParameters_cfg.py %d %d %d %d\n' % (0, (1-1)*opt.files, (1-1)*opt.files+opt.files, (n-1)*opt.nevts ))
     #scriptFile.write('cmsMkdir $OUTDIR\n')
     scriptFile.write('export OUTPUT=AnaResults_%d.root\n' % n)
     scriptFile.write('cp AnaResults.root $OUTDIR/$OUTPUT\n')

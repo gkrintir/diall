@@ -95,28 +95,29 @@ public:
    TH1F             *fNEvents;            //!# selected events
    TTree            *fAnaTtbarDileptonInfo;
    
-   std::vector<Float_t>   fEventWeight;         //!# selected b-tagged jets in event
-   std::vector<Int_t>     fNRecoLeptonLead;        //!# selected electrons in event
-   std::vector<Int_t>     fNRecoLeptonSublead;     //!# selected muons in event
-   std::vector<Int_t>     fNJetsIncl;          //!# selected jets in event
-   std::vector<Int_t>     fNBJetsIncl;         //!# selected b-tagged jets in event
-   std::vector<Float_t>   fBJetsDiscr;         //!# selected b-tagged jets in event
+   std::vector<Float_t>   fEventWeight;         //!# generator weight
+   std::vector<Float_t>   fProcessXSection;     //!# generator x-section
+   std::vector<Int_t>     fNRecoLeptonLead;     //!# selected electrons in event
+   std::vector<Int_t>     fNRecoLeptonSublead   //!# selected muons in event
+   std::vector<Int_t>     fNJetsIncl;           //!# selected jets in event
+   std::vector<Int_t>     fNBJetsIncl;          //!# selected b-tagged jets in event
+   std::vector<Float_t>   fBJetsDiscr;          //!# selected b-tagged jets in event
    
-   std::vector<Float_t>   fHT;                 //!# HT varialbe
-   std::vector<Float_t>   fMassDilepton;            //!# dilepton mass varialbe
-   std::vector<Float_t>   fLeadJetPt;          //!# dilepton mass varialbe
-   std::vector<Float_t>   fLeadRecoLeptonPt;       //!# dilepton mass varialbe
-   std::vector<Float_t>   fLeadRecoLeptonAbsEta;   //!# dilepton mass varialbe
-   std::vector<Float_t>   fLeadRecoLeptonEta;      //!# dilepton mass varialbe
-   std::vector<Int_t>     fNJets;              //!# dilepton mass varialbe
+   std::vector<Float_t>   fHT;                  //!# HT varialbe
+   std::vector<Float_t>   fMassDilepton;        //!# dilepton mass varialbe
+   std::vector<Float_t>   fLeadJetPt;           //!# dilepton mass varialbe
+   std::vector<Float_t>   fLeadRecoLeptonPt;    //!# dilepton mass varialbe
+   std::vector<Float_t>   fLeadRecoLeptonAbsEta;//!# dilepton mass varialbe
+   std::vector<Float_t>   fLeadRecoLeptonEta;   //!# dilepton mass varialbe
+   std::vector<Int_t>     fNJets;               //!# dilepton mass varialbe
 
    
-   std::vector<Double_t>  fDeltaPhi_Rec2jets;  //!# HT varialbe
+   std::vector<Double_t>  fDeltaPhi_Rec2jets;       //!# HT varialbe
    std::vector<Float_t>   fMassDilepton_Rec2jets;   //!# dilepton mass varialbe
-   std::vector<Float_t>   fLeadJetPt_Rec2jets; //!# dilepton mass varialbe
-   std::vector<Float_t>   fLeadJetAbsEta_Rec2jets; //!# dilepton mass varialbe
-   std::vector<Float_t>   fLeadJetEta_Rec2jets;    //!# dilepton mass varialbe
-   std::vector<Float_t>   fLeadRecoLeptonPt_Rec2jets;  //!# dilepton mass varialbe
+   std::vector<Float_t>   fLeadJetPt_Rec2jets;      //!# dilepton mass varialbe
+   std::vector<Float_t>   fLeadJetAbsEta_Rec2jets;  //!# dilepton mass varialbe
+   std::vector<Float_t>   fLeadJetEta_Rec2jets;     //!# dilepton mass varialbe
+   std::vector<Float_t>   fLeadRecoLeptonPt_Rec2jets;    //!# dilepton mass varialbe
    std::vector<Float_t>   fLeadRecoLeptonAbsEta_Rec2jets;//!# dilepton mass varialbe
    std::vector<Float_t>   fLeadRecoLeptonEta_Rec2jets;   //!# dilepton mass varialbe
 

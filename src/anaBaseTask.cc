@@ -84,6 +84,7 @@ bool anaBaseTask::SelectEvent() const {
   bool accept = true;
   
   if(fHiEvent) {
+    /*
     if(fCollSel && !fHiEvent->GetColl()) accept = false;
     //  printf("accept 1 %d %d %d\n", accept, fCollSel, !fHiEvent->GetColl()); }
     if(fHBHENoise && !fHiEvent->GetHBHENoise()) accept = false;
@@ -91,11 +92,11 @@ bool anaBaseTask::SelectEvent() const {
     if(fCentMin>-1) {
       double cent = fHiEvent->GetCentrality();
       if(cent<fCentMin && cent>fCentMax) accept = false;
-//	printf("accept 3 %d %f %d\n", accept, cent, !fHiEvent->GetCentrality()); }
+      //	printf("accept 3 %d %f %d\n", accept, cent, !fHiEvent->GetCentrality()); }
     }
     
     if(fPFJet80 && !fHiEvent->GetPFJet80()) { accept = false;
-  //    printf("accept 4 %d %d %d\n", accept, fPFJet80, !fHiEvent->GetPFJet80() );
+      //    printf("accept 4 %d %d %d\n", accept, fPFJet80, !fHiEvent->GetPFJet80() );
     }
     if(fPhoton30 && !fHiEvent->GetPhoton30()) { accept = false;
     //  printf("accept 5 %d %d %d\n", accept, fPhoton30, !fHiEvent->GetPhoton30() );
@@ -108,8 +109,9 @@ bool anaBaseTask::SelectEvent() const {
 
     //special for express stream
     if(fPhoton30Excl && fHiEvent->GetPhoton30()) { accept = false;
- //     printf("accept 8 %d %d %d\n", accept, fPhoton30Excl, !fHiEvent->GetPhoton30() );
+      //     printf("accept 8 %d %d %d\n", accept, fPhoton30Excl, !fHiEvent->GetPhoton30() );
     }
+    */
   }
 
   return accept;

@@ -99,8 +99,8 @@ Bool_t lwElectronProducer::Init() {
     //fChain->SetBranchStatus("*", 0);
     fChain->SetBranchStatus("nEle",1);     // enable electron branches
     fChain->SetBranchStatus("ele*",1);     // enable electron branches
-    if (fChain->GetBranch("nEle")){    printf("mpika!!!!! ");
-      fChain->SetBranchAddress("nEle", &fElectrons.nEle, &fElectrons.b_nEle); }
+    if (fChain->GetBranch("nEle"))    
+      fChain->SetBranchAddress("nEle", &fElectrons.nEle, &fElectrons.b_nEle); 
     if (fChain->GetBranch("eleEn"))
       fChain->SetBranchAddress("eleEn", &fElectrons.eleEn, &fElectrons.b_eleEn);
     if (fChain->GetBranch("eleCharge"))
@@ -177,6 +177,7 @@ Bool_t lwElectronProducer::InitEventObjects() {
       fEventObjects->Add(flwElectronsReco);
     }
     if(!fEventObjects->FindObject(flwElectronsGeneName) && !flwElectronsGeneName.IsNull()) {
+      std::cout << "mpika!!!! "<<  flwElectronsGeneName.Data()<< std::endl;
       flwElectronsGene = new TClonesArray("genParticle");
       flwElectronsGene->SetName(flwElectronsGeneName);
       fEventObjects->Add(flwElectronsGene);

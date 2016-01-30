@@ -64,18 +64,40 @@ Bool_t lwMuonProducer::Init() {
   
   if(fInputMode==hiForest) {
     // Gen Info
-    if (fChain->GetBranch("Gen_nptl"))
-      fChain->SetBranchAddress("Gen_nptl", &fMuons.Gen_nptl, &fMuons.b_Gen_nptl);
-    if (fChain->GetBranch("Gen_pid"))
-      fChain->SetBranchAddress("Gen_pid", &fMuons.Gen_pid, &fMuons.b_Gen_pid);
-    if (fChain->GetBranch("Gen_mom"))
-      fChain->SetBranchAddress("Gen_mom", &fMuons.Gen_mom, &fMuons.b_Gen_mom);
-    if (fChain->GetBranch("Gen_pt"))
-      fChain->SetBranchAddress("Gen_pt", &fMuons.Gen_pt, &fMuons.b_Gen_pt);
-    if (fChain->GetBranch("Gen_eta"))
-      fChain->SetBranchAddress("Gen_eta", &fMuons.Gen_eta, &fMuons.b_Gen_eta);
-    if (fChain->GetBranch("Gen_phi"))
-      fChain->SetBranchAddress("Gen_phi", &fMuons.Gen_phi, &fMuons.b_Gen_phi);
+    fChain->SetBranchStatus("*", 0);
+    fChain->SetBranchStatus("nMC", 1);
+    fChain->SetBranchStatus("mc*", 1);
+    if (fChain->GetBranch("nMC"))
+      fChain->SetBranchAddress("nMC", &fMuons.Gen_nMC, &fMuons.b_Gen_nMC);
+    if (fChain->GetBranch("mcPID"))
+      fChain->SetBranchAddress("mcPID", &fMuons.Gen_pid, &fMuons.b_Gen_pid);
+    if (fChain->GetBranch("mcStatus"))
+      fChain->SetBranchAddress("mcStatus", &fMuons.Gen_status, &fMuons.b_Gen_status);
+    if (fChain->GetBranch("mcMass"))
+      fChain->SetBranchAddress("mcMass", &fMuons.Gen_mass, &fMuons.b_Gen_mass);
+     if (fChain->GetBranch("mcE"))
+      fChain->SetBranchAddress("mcE", &fMuons.Gen_e, &fMuons.b_Gen_e);
+    if (fChain->GetBranch("mcPt"))
+      fChain->SetBranchAddress("mcPt", &fMuons.Gen_pt, &fMuons.b_Gen_pt);
+    if (fChain->GetBranch("mcEta"))
+      fChain->SetBranchAddress("mcEta", &fMuons.Gen_eta, &fMuons.b_Gen_eta);
+    if (fChain->GetBranch("mcPhi"))
+      fChain->SetBranchAddress("mcPhi", &fMuons.Gen_phi, &fMuons.b_Gen_phi);
+    if (fChain->GetBranch("mcMomPID"))
+      fChain->SetBranchAddress("mcMomPID", &fMuons.Gen_mompid, &fMuons.b_Gen_mompid);
+    if (fChain->GetBranch("mcMommass"))
+      fChain->SetBranchAddress("mcMommass", &fMuons.Gen_mommass, &fMuons.b_Gen_mommass);
+    if (fChain->GetBranch("mcMomE"))
+      fChain->SetBranchAddress("mcMomE", &fMuons.Gen_mome, &fMuons.b_Gen_mome);
+    if (fChain->GetBranch("mcMomPt"))
+      fChain->SetBranchAddress("mcMomPt", &fMuons.Gen_mompt, &fMuons.b_Gen_mompt);
+    if (fChain->GetBranch("mcMomEta"))
+      fChain->SetBranchAddress("mcMomEta", &fMuons.Gen_mometa, &fMuons.b_Gen_mometa);
+    if (fChain->GetBranch("mcMomPhi"))
+      fChain->SetBranchAddress("mcMomPhi", &fMuons.Gen_momphi, &fMuons.b_Gen_momphi);
+     if (fChain->GetBranch("mcGMomPID"))
+      fChain->SetBranchAddress("mcGMomPID", &fMuons.Gen_Gmompid, &fMuons.b_Gen_Gmompid);
+
     // Reco Info
     fChain->SetBranchStatus("*", 0);
     fChain->SetBranchStatus("nMu", 1);
@@ -185,15 +207,16 @@ Bool_t lwMuonProducer::Run(Long64_t entry) {
   //generated muons
   if(flwMuonsGene) {
     muCount = 0;
-    for(Int_t i = 0; i<fMuons.Gen_nptl; i++) {
-      genParticle *mu = new genParticle(fMuons.Gen_pt[i],
-                                        fMuons.Gen_eta[i],
-                                        fMuons.Gen_phi[i],
+    for(Int_t i = 0; i<fMuons.Gen_nMC; i++) {
+      genParticle *mu = new genParticle(fMuons.Gen_pt->at(i),
+                                        fMuons.Gen_eta->at(i),
+                                        fMuons.Gen_phi->at(i),
                                         0,
                                         i);
-      mu->SetCharge(fMuons.Gen_pid[i]/abs(fMuons.Gen_pid[i]));
-      mu->SetPID(fMuons.Gen_pid[i]);
-      mu->SetPIDMom(fMuons.Gen_mom[i]);
+      mu->SetCharge(fMuons.Gen_pid->at(i)/abs(fMuons.Gen_pid->at(i)));
+      mu->SetPID(fMuons.Gen_pid->at(i));
+      mu->SetPIDMom(fMuons.Gen_mompid->at(i));
+      mu->SetPIDGMom(fMuons.Gen_Gmompid->at(i));
       (*flwMuonsGene)[muCount] = mu;
       ++muCount;
     }

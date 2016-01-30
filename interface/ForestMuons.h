@@ -22,14 +22,23 @@ public :
    Float_t         vy;
    Float_t         vz;
    // GenParticle info
-   Int_t           Gen_nptl;
-   Int_t           Gen_pid[maxForestMuons];   //[Gen_nptl]
-   Int_t           Gen_mom[maxForestMuons];   //[Gen_nptl] pid mother
-   Int_t           Gen_status[maxForestMuons];   //[Gen_nptl]
-   Float_t         Gen_p[maxForestMuons];   //[Gen_nptl]
-   Float_t         Gen_pt[maxForestMuons];   //[Gen_nptl]
-   Float_t         Gen_eta[maxForestMuons];   //[Gen_nptl]
-   Float_t         Gen_phi[maxForestMuons];   //[Gen_nptl]
+   int             Gen_nMC;
+   std::vector<int>           *Gen_pid=0;   //[Gen_nptl]
+   std::vector<int>           *Gen_status=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_mass=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_e=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_pt=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_eta=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_phi=0;   //[Gen_nptl]
+   std::vector<int>           *Gen_mompid=0;   //[Gen_nptl] pid mother
+   std::vector<float>         *Gen_mommass=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_mome=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_mompt=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_mometa=0;   //[Gen_nptl]
+   std::vector<float>         *Gen_momphi=0;   //[Gen_nptl]
+   std::vector<int>           *Gen_Gmompid=0;   //[Gen_nptl] pid mother
+      
+
    // RecoMuon info
    //// (mu->isPFMuon() || mu->isGlobalMuon() || mu->isTrackerMuon()) && mu->pt() > 5
    Int_t           Glb_nptl;
@@ -106,14 +115,22 @@ public :
    TBranch        *b_vy;   //!
    TBranch        *b_vz;   //!
    // GenParticle info
-   TBranch        *b_Gen_nptl;   //!
+   TBranch        *b_Gen_nMC;   //!
    TBranch        *b_Gen_pid;   //!
-   TBranch        *b_Gen_mom;   //!
    TBranch        *b_Gen_status;   //!
-   TBranch        *b_Gen_p;   //!
+   TBranch        *b_Gen_mass;   //
+   TBranch        *b_Gen_e;   //!
    TBranch        *b_Gen_pt;   //!
    TBranch        *b_Gen_eta;   //!
    TBranch        *b_Gen_phi;   //!
+   TBranch        *b_Gen_mompid;   //!
+   TBranch        *b_Gen_mommass;   //
+   TBranch        *b_Gen_mome;   //!
+   TBranch        *b_Gen_mompt;   //!
+   TBranch        *b_Gen_mometa;   //!
+   TBranch        *b_Gen_momphi;   //!
+   TBranch        *b_Gen_Gmompid;   //!
+   
    // RecoMuon info
    TBranch        *b_Glb_nptl;   //!
    TBranch        *b_Glb_charge;   //!

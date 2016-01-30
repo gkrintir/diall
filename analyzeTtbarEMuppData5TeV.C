@@ -9,6 +9,7 @@
 #include "UserCode/diall/interface/triggerProducer.h"
 #include "UserCode/diall/interface/anaBaseTask.h"
 #include "UserCode/diall/interface/anaTtbarEMu.h"
+#include "UserCode/diall/interface/anaTtbarDilepton.h"
 #include "UserCode/diall/interface/anaJetMatching.h"
 #include "UserCode/diall/interface/anaJetQA.h"
 #include "UserCode/diall/interface/anaRhoProducer.h"
@@ -129,7 +130,7 @@ void analyzeTtbarEMuppData5TeV(std::vector<std::string> urls, const char *outnam
   lwMuonProducer *p_mu = new lwMuonProducer("lwMuonProd");
   p_mu->SetInput(chain);
   p_mu->SetlwMuonsRecoName("lwMuonsReco");
-  //p_mu->SetlwMuonsGeneName("lwMuonsGene");
+  p_mu->SetlwMuonsGeneName("lwMuonsGene");
   p_mu->SetEventObjects(fEventObjects);
 
   lwElectronProducer *p_ele = new lwElectronProducer("lwElectronProd");
@@ -143,7 +144,7 @@ void analyzeTtbarEMuppData5TeV(std::vector<std::string> urls, const char *outnam
   p_pfJet->SetInput(chain);//chain);
   p_pfJet->SetJetContName("akt4PF");
   p_pfJet->DoPFJetID(true);//true);
-  p_pfJet->SetGenJetContName("");//akt4Gen");
+  p_pfJet->SetGenJetContName("akt4Gen");
   p_pfJet->SetEventObjects(fEventObjects);
   p_pfJet->SetRadius(0.4);
   
@@ -177,7 +178,7 @@ void analyzeTtbarEMuppData5TeV(std::vector<std::string> urls, const char *outnam
   matchingPFCaloJet->SetNCentBins(1);
   matchingPFCaloJet->SetMatchingType(0);
   //handler->Add(matchingPFCaloJet);  
-    
+  /*
   anaTtbarEMu *anaTtbar = new anaTtbarEMu("anaPFvsCaloJet","anaPFvsCaloJet");
   anaTtbar->ConnectEventObject(fEventObjects);
   anaTtbar->SetHiEvtName("hiEventContainer");
@@ -188,7 +189,21 @@ void analyzeTtbarEMuppData5TeV(std::vector<std::string> urls, const char *outnam
   anaTtbar->SetRecoJetsName("akt4PF");
   anaTtbar->SetMetType(anaTtbarEMu::kPFRaw);
   handler->Add(anaTtbar);
-  
+  */
+  anaTtbarDilepton *anaTtbar = new anaTtbarDilepton("anaPFvsCaloJet","anaPFvsCaloJet");
+  anaTtbar->ConnectEventObject(fEventObjects);
+  anaTtbar->SetHiEvtName("hiEventContainer");
+  //anaTtbar->SetTriggerMapName("triggerMap");
+  anaTtbar->SetParticlesName("pfParticles");
+  anaTtbar->SetRecoLeptonLeadName("lwElectronsReco");
+  anaTtbar->SetRecoLeptonSubleadName("lwMuonsReco");
+  anaTtbar->SetGenLeptonName("lwMuonsGene");
+  anaTtbar->SetRecoJetsName("akt4PF");
+  anaTtbar->SetGenJetsName("akt4Gen");
+  //anaTtbar->SetMetType(anaTtbarDilepton::kPFRaw);
+  handler->Add(anaTtbar);
+
+
   anaPFvsCaloJet *anaCaloPFJet = new anaPFvsCaloJet("anaCalovsPFJet","anaCalovsPFJet");
   anaCaloPFJet->ConnectEventObject(fEventObjects);
   anaCaloPFJet->SetHiEvtName("hiEventContainer");
@@ -258,4 +273,5 @@ void analyzeTtbarEMuppData5TeV(std::vector<std::string> urls, const char *outnam
     if(obj->GetOutput()) obj->GetOutput()->Write(obj->GetName(),TObject::kSingleKey);
   out->Write();
   out->Close();
+
 }

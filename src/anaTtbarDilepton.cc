@@ -52,7 +52,7 @@ anaTtbarDilepton::anaTtbarDilepton(const char *name, const char *title)
 void anaTtbarDilepton::Exec(Option_t * /*option*/)
 {
 
-    //printf("anaTtbarDilepton executing\n");
+   //printf("anaTtbarDilepton executing\n");
    //if(!SelectEvent()) return;
 
    TLorentzVector met;
@@ -68,7 +68,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    if(!fHiEvent) { Printf("No %s HiEventContainer found", fEvtName.Data()); return; }
 
    fEventWeight.push_back(fHiEvent -> GetWeight());
-
+   
    //Get triggers
    if(!fTriggerMap && !fTriggerMapName.IsNull()) {
      fTriggerMap = dynamic_cast<triggerMap*>(fEventObjects->FindObject(fTriggerMapName.Data()));
@@ -105,9 +105,9 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
      fGenLepton = dynamic_cast<TClonesArray*>(fEventObjects->FindObject(fGenLeptonName.Data()));
    }
    if(!fGenLepton) { Printf("No %s GenLepton found", fGenLeptonName.Data()); return; } 
-   const Int_t nGenLeptons = fGenLepton->GetEntriesFast();
-   std::cout << "nleptons "<< nGenLeptons << std::endl;
-
+   //const Int_t nGenLeptons = fGenLepton->GetEntriesFast();
+   //std::cout << "nleptons "<< nGenLeptons << std::endl;
+   
    //Make array for emu candidates
    if(!fEventObjects->FindObject(fDileptonName) && !fDilepton) {
       fDilepton = new TClonesArray("diParticle");
@@ -142,7 +142,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
      lwJet * jet = fGenJets->GetJet(i);
      std::cout<<"disc " <<jet->Pt()<<std::endl;
    }
-
+   
    FillDileptonArray(nRecoLeptonLead, nRecoLeptonSublead);
 
 
