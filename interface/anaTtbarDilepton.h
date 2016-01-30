@@ -98,7 +98,7 @@ public:
    std::vector<Float_t>   fEventWeight;         //!# generator weight
    std::vector<Float_t>   fProcessXSection;     //!# generator x-section
    std::vector<Int_t>     fNRecoLeptonLead;     //!# selected electrons in event
-   std::vector<Int_t>     fNRecoLeptonSublead   //!# selected muons in event
+   std::vector<Int_t>     fNRecoLeptonSublead;  //!# selected muons in event
    std::vector<Int_t>     fNJetsIncl;           //!# selected jets in event
    std::vector<Int_t>     fNBJetsIncl;          //!# selected b-tagged jets in event
    std::vector<Float_t>   fBJetsDiscr;          //!# selected b-tagged jets in event

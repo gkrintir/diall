@@ -136,12 +136,12 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    if(!fGenJets && !fGenJetsName.IsNull())
      fGenJets = dynamic_cast<lwJetContainer*>(fEventObjects->FindObject(fGenJetsName.Data()));
    if(!fGenJets) { Printf("No %s GenJets found", fGenJetsName.Data()); return; }
-   const Int_t nGenJets= fGenJets->GetNJets();
+   //const Int_t nGenJets= fGenJets->GetNJets();
      
-   for (int i = 0; i < nGenJets; i++) {
-     lwJet * jet = fGenJets->GetJet(i);
-     std::cout<<"disc " <<jet->Pt()<<std::endl;
-   }
+   //for (int i = 0; i < nGenJets; i++) {
+   //  lwJet * jet = fGenJets->GetJet(i);
+   //  std::cout<<"disc " <<jet->Pt()<<std::endl;
+   // }
    
    FillDileptonArray(nRecoLeptonLead, nRecoLeptonSublead);
 
@@ -247,20 +247,19 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
        diParticle *pPart = (diParticle*)fDilepton->At(i);
        particleBase *pPart1 = dynamic_cast<particleBase*>(pPart->GetDecayParticles()->At(0));
        particleBase *pPart2 = dynamic_cast<particleBase*>(pPart->GetDecayParticles()->At(1));
-	  
+
        bool dr_flag = false; 
+       
        for (int ijet = 0; ijet < fRecoJets->GetNJets(); ijet++) 
        {
-	   lwJet * jet = fRecoJets->GetJet(i);
-	   if(jet->DeltaR(pPart1)<0.4 || jet->DeltaR(pPart2)<0.4) dr_flag = true;
-	   
+	 lwJet * jet = dynamic_cast<lwJet*>(fRecoJets->GetJet(ijet));
+	 if(jet->DeltaR(pPart1)<0.4 || jet->DeltaR(pPart2)<0.4) dr_flag = true;
        }
        if(!dr_flag)
        {
 	 float ht = 0;
 	 if(pPart->M()>20)
-	 {
-	     std::cout<< " meta "<< nbjets<<std::endl;
+	   {
 	     fMassDilepton.push_back(pPart->M());
 	     if (pPart1->Pt()>pPart2->Pt()) 
 	     {
@@ -275,16 +274,16 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
 		 fLeadRecoLeptonEta.push_back(pPart2->Eta());
 	     }
 	     if(!filled)
-	     {
+	     { 
 	         fNEvents->Fill(4);
-		 for (int jet = 0; jet < fRecoJets->GetNJets(); jet++) 
+		 for (int ijet = 0; ijet < fRecoJets->GetNJets(); ijet++) 
 		 {
-		     float pt = fRecoJets->GetJet(jet)->Pt();
-		     if (jet==0)
+		     float pt = fRecoJets->GetJet(ijet)->Pt();
+		     if (ijet==0)
 		     {
 		         fLeadJetPt.push_back(pt);
 		     }
-		     ht += fRecoJets->GetJet(jet)->Pt();
+		     ht += fRecoJets->GetJet(ijet)->Pt();
 		 }
 		 fHT.push_back(ht);
 		 fNJets.push_back(nRecoJets);
@@ -300,6 +299,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
 		       break;
 		 }
 		 filled=true;
+
 	     }
 	     if(nRecoJets>=2)
 	     {

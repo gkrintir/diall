@@ -31,8 +31,8 @@ centralityRequirements={"inc":[0,200],
 
 #sample=tt_PbPb
 #sample=DY_PbPb
-#sample=W_PbPb
-sample=WW_PbPb 
+sample=W_PbPb
+#sample=WW_PbPb 
 
 
 centralityBins=centralityRequirements["inc"]
