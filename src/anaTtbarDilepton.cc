@@ -89,8 +89,9 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    //Get leading lepton
    if(!fRecoLeptonLead && !fRecoLeptonLeadName.IsNull()) {
      fRecoLeptonLead = dynamic_cast<TClonesArray*>(fEventObjects->FindObject(fRecoLeptonLeadName.Data()));
+     if(!fRecoLeptonLead) { Printf("No %s RecoLeptonLead found", fRecoLeptonLeadName.Data()); return; }
    }
-   if(!fRecoLeptonLead) { Printf("No %s RecoLeptonLead found", fRecoLeptonLeadName.Data()); return; }
+
 
    const Int_t nRecoLeptonLead = fRecoLeptonLead->GetEntriesFast();
    fNRecoLeptonLead.push_back(nRecoLeptonLead);
@@ -98,8 +99,9 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    //Get subleading lepton
    if(!fRecoLeptonSublead && !fRecoLeptonSubleadName.IsNull()) {
      fRecoLeptonSublead = dynamic_cast<TClonesArray*>(fEventObjects->FindObject(fRecoLeptonSubleadName.Data()));
+     if(!fRecoLeptonSublead) { Printf("No %s RecoLeptonSublead found", fRecoLeptonSubleadName.Data()); return; } 
    }
-   if(!fRecoLeptonSublead) { Printf("No %s RecoLeptonSublead found", fRecoLeptonSubleadName.Data()); return; } 
+
 
    const Int_t nRecoLeptonSublead = fRecoLeptonSublead->GetEntriesFast();
    fNRecoLeptonSublead.push_back(nRecoLeptonSublead);
@@ -107,8 +109,8 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    //Get gen lepton
    if(!fGenLepton && !fGenLeptonName.IsNull()) {
      fGenLepton = dynamic_cast<TClonesArray*>(fEventObjects->FindObject(fGenLeptonName.Data()));
+     if(!fGenLepton) { Printf("No %s GenLepton found", fGenLeptonName.Data()); return; } 
    }
-   if(!fGenLepton) { Printf("No %s GenLepton found", fGenLeptonName.Data()); return; } 
    //const Int_t nGenLeptons = fGenLepton->GetEntriesFast();
    //std::cout << "nleptons "<< nGenLeptons << std::endl;
    
@@ -130,14 +132,15 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    //if(fTops) fTops->Delete();
    
    //Get reco jets
-   if(!fRecoJets && !fRecoJetsName.IsNull())
+   if(!fRecoJets && !fRecoJetsName.IsNull()) {
      fRecoJets = dynamic_cast<lwJetContainer*>(fEventObjects->FindObject(fRecoJetsName.Data()));
-   if(!fRecoJets) { Printf("No %s RecoJets found", fRecoJetsName.Data()); return; }
+   if(!fRecoJets) { Printf("No %s RecoJets found", fRecoJetsName.Data()); return; 
+   }}
    
    //Get gen jets
-   if(!fGenJets && !fGenJetsName.IsNull())
+   if(!fGenJets && !fGenJetsName.IsNull()){
      fGenJets = dynamic_cast<lwJetContainer*>(fEventObjects->FindObject(fGenJetsName.Data()));
-   if(!fGenJets) { Printf("No %s GenJets found", fGenJetsName.Data()); return; }
+     if(!fGenJets) { Printf("No %s GenJets found", fGenJetsName.Data()); return; }}
    //const Int_t nGenJets= fGenJets->GetNJets();
      
    //for (int i = 0; i < nGenJets; i++) {
