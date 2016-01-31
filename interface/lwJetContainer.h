@@ -18,7 +18,7 @@ class lwJetContainer : public TNamed {
   lwJetContainer(const char *name);
   virtual ~lwJetContainer() {;}
 
-  Int_t         GetNJets()                 const { return fJets->GetEntriesFast();}
+  Int_t         GetNJets()                 const { return fJets->GetEntries();}
   TClonesArray* GetJets()                  const { return fJets; }
   lwJet*        GetJet(Int_t i)            const ;
   TClonesArray* GetConstituents()          const { return fConst;}

@@ -42,12 +42,16 @@ anaTtbarDilepton::anaTtbarDilepton(const char *name, const char *title)
 
 {
 
-  //for(Int_t j = 0; j<10; ++j)
-  // fh2MetCentPtMin[j] = 0;
-  
+
 }
 
+//----------------------------------------------------------
+anaTtbarDilepton::~anaTtbarDilepton()
+{
 
+  //fRecoRemovalJets->Clear();
+  
+}
 //----------------------------------------------------------
 void anaTtbarDilepton::Exec(Option_t * /*option*/)
 {
@@ -129,8 +133,6 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    if(!fRecoJets && !fRecoJetsName.IsNull())
      fRecoJets = dynamic_cast<lwJetContainer*>(fEventObjects->FindObject(fRecoJetsName.Data()));
    if(!fRecoJets) { Printf("No %s RecoJets found", fRecoJetsName.Data()); return; }
-   const Int_t nRecoJets= fRecoJets->GetNJets();
-   fNJetsIncl.push_back(nRecoJets);
    
    //Get gen jets
    if(!fGenJets && !fGenJetsName.IsNull())
@@ -145,14 +147,30 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    
    FillDileptonArray(nRecoLeptonLead, nRecoLeptonSublead);
 
+    for(int i = 0; i<fDileptonCands; ++i) 
+    { 
+	diParticle *pPart = (diParticle*)fDilepton->At(i);
+	particleBase *pPart1 = dynamic_cast<particleBase*>(pPart->GetDecayParticles()->At(0));
+	particleBase *pPart2 = dynamic_cast<particleBase*>(pPart->GetDecayParticles()->At(1));
 
-   Int_t nbjets = 0;
-   for (int i = 0; i < fRecoJets->GetNJets(); i++) {
-     lwJet * jet = fRecoJets->GetJet(i);
+	for (int ijet = 0; ijet < fRecoJets->GetNJets(); ijet++) 
+	{
+	    lwJet * jet = dynamic_cast<lwJet*>(fRecoJets->GetJet(ijet));
+	    if(jet->DeltaR(pPart1)<0.4 && jet->DeltaR(pPart2)<0.4) 
+	      fRecoRemovalJets.push_back(jet);
+	}
+    }
+
+    const Int_t nRecoJets= fRecoRemovalJets.size();
+    fNJetsIncl.push_back(nRecoJets);
+   
+    Int_t nbjets = 0;
+    for (unsigned int i = 0; i < fRecoRemovalJets.size(); i++) {
+     lwJet * jet = dynamic_cast<lwJet*>(fRecoRemovalJets[i]);
      fBJetsDiscr.push_back(jet->GetCsvSimpleDiscr());
-     if(jet->GetCsvSimpleDiscr()>0.9)nbjets++;
-     //std::cout<<"disc" <<jet->GetCsvSimpleDiscr()<<std::endl;
+     if(jet->GetCsvSimpleDiscr()>0.9) ++nbjets;
    }
+   
    fNBJetsIncl.push_back(nbjets);
    
    //Get particles from which MET will be calculated
@@ -250,11 +268,6 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
 
        bool dr_flag = false; 
        
-       for (int ijet = 0; ijet < fRecoJets->GetNJets(); ijet++) 
-       {
-	 lwJet * jet = dynamic_cast<lwJet*>(fRecoJets->GetJet(ijet));
-	 if(jet->DeltaR(pPart1)<0.4 || jet->DeltaR(pPart2)<0.4) dr_flag = true;
-       }
        if(!dr_flag)
        {
 	 float ht = 0;
@@ -276,14 +289,14 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
 	     if(!filled)
 	     { 
 	         fNEvents->Fill(4);
-		 for (int ijet = 0; ijet < fRecoJets->GetNJets(); ijet++) 
+		 for (unsigned int ijet = 0; ijet < fRecoRemovalJets.size(); ijet++) 
 		 {
-		     float pt = fRecoJets->GetJet(ijet)->Pt();
+		     float pt = fRecoRemovalJets[ijet]->Pt();
 		     if (ijet==0)
 		     {
 		         fLeadJetPt.push_back(pt);
 		     }
-		     ht += fRecoJets->GetJet(ijet)->Pt();
+		     ht += fRecoRemovalJets[ijet]->Pt();
 		 }
 		 fHT.push_back(ht);
 		 fNJets.push_back(nRecoJets);
@@ -305,9 +318,9 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
 	     {
 	         if(!filled_Rec2jets)
 		 {
-		     fLeadJetPt_Rec2jets.push_back(fRecoJets->GetJet(0)->Pt());
-		     fLeadJetAbsEta_Rec2jets.push_back(TMath::Abs(fRecoJets->GetJet(0)->Eta()));
-		     fLeadJetEta_Rec2jets.push_back(fRecoJets->GetJet(0)->Eta());
+		     fLeadJetPt_Rec2jets.push_back(fRecoRemovalJets[0]->Pt());
+		     fLeadJetAbsEta_Rec2jets.push_back(TMath::Abs(fRecoRemovalJets[0]->Eta()));
+		     fLeadJetEta_Rec2jets.push_back(fRecoRemovalJets[0]->Eta());
 		     filled_Rec2jets=true;
 		 }
 		    
@@ -331,6 +344,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    }
    
      fAnaTtbarDileptonInfo->Fill();
+     fRecoRemovalJets.clear();
      fEventWeight.clear();
      fNRecoLeptonLead.clear();       
      fNRecoLeptonSublead.clear();             

@@ -40,7 +40,7 @@ public:
   
    anaTtbarDilepton() {;}
    anaTtbarDilepton(const char *name, const char *title);
-   virtual ~anaTtbarDilepton() {;}
+   virtual ~anaTtbarDilepton();
    void Exec(Option_t *option="");
    void ConstructModel(RooDataHist Hist, RooDataHist *bkg_hist, bool BKGSubtract);
    std::pair<double, double> compMETProjU(diParticle* zP4, double metPx, double metPy, int& errorFlag, int count);
@@ -87,6 +87,7 @@ public:
    TClonesArray     *fGenLepton;            //!gen lepton arra
    lwJetContainer   *fGenJets;              //!jet container
    lwJetContainer   *fRecoJets;             //!jet container
+   std::vector<lwJet*> fRecoRemovalJets;    //!jet container
    TClonesArray     *fParticles;            //!pfParticle array
    TClonesArray     *fDilepton;             //!dilepton candidates 
    TClonesArray     *fTops;                 //!Top quark candidates container

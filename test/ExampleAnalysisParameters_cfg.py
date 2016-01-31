@@ -58,7 +58,7 @@ config = cms.PSet(
         #'root://cmsxrootd.fnal.gov//store/user/gkrintir/TopHI/HighPtLowerPhotons_Run2015E-PromptReco-v1_v1/HighPtLowerPhotons/crab_TopHI/160111_200108/0000/HiForestAOD_9.root',
         #'root://cmsxrootd.fnal.gov//store/user/gkrintir/TopHI/HighPtLowerPhotons_Run2015E-PromptReco-v1_v1/HighPtLowerPhotons/crab_TopHI/160111_200108/0000/HiForestAOD_10.root'
         ), #fillFromStore(sample[1]) 
-    maxEvents = cms.int32(10000),#-1),
+    maxEvents = cms.int32(10),#-1),
     minCentrality = cms.int32(centralityBins[0]),
     maxCentrality = cms.int32(centralityBins[1])#,
    # anaFile = cms.int32(options.anaFile)
