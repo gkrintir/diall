@@ -6,6 +6,10 @@
 *.exe
 *.o
 *.so
+*.cc#
+*.cc~
+*_cc_ACLiC_dict_rdict.pcm
+*_cc.d
 *.pyc
 *.pyc~
 *.py~
