@@ -34,21 +34,20 @@ def fillFromStore(dir,ffile=0,step=-1,generatePfn=True):
         prefix='root://cmsxrootd.fnal.gov//'
         #lscommand = 'lcg-ls -D srmv2 -b %s'%dir
         lscommand = 'lcg-ls %s' % dir
+        #print lscommand
         lsout = commands.getstatusoutput(lscommand)[1].split()
-        print lscommand
-
         for l in lsout :
-	    #print l 
+                #print l 
             if l.find('.root')<0 : continue
             #if l.find('step3')<0 : continue #RECO files
             #if(l.find('/mnt/hadoop/cms')>=0) : #/mnt/hadoop/cms 
-	    newl = l.replace('/mnt/hadoop/cms','')
+                newl = l.replace('/mnt/hadoop/cms','')
             xrootdName=prefix+newl
             #xrootdName=xrootdName.replace('/eos/uscms/','')
-	    #print 'prefix'
-	    #print prefix
-	    print 'xrootdName: %s' % xrootdName
-	    print l
+                #print 'prefix'
+                #print prefix
+                print 'xrootdName: %s' % xrootdName
+                    print l
             localdataset.extend( [ xrootdName ] )
         return localdataset
     elif dir.find('/store/')==0:
@@ -125,7 +124,7 @@ def checkStoreForDuplicates(outdir):
     if(outdir.find('/store/')==0) :
         isEOS=True
         splitOnString=','
-        ls_cms='cmsLs ' + outdir + ' | grep root | awk \'{print $5}\''	
+        ls_cms='cmsLs ' + outdir + ' | grep root | awk \'{print $5}\''
     elif(outdir.find('/store/')==0) :
         isCastor = True
         ls_cms = "rfdir " + outdir + + ' | grep root'
@@ -143,24 +142,24 @@ def checkStoreForDuplicates(outdir):
                 fileName=fileLine
                 if(isCastor) : fileName = fileLine.split()[8]
 
-	        if(checkInputFile(fileName)==True):
-		    jobNumber=-1
-		    try:
-			fileBaseName=os.path.basename(fileName)
-			jobNumber=int(fileBaseName.split("_")[1])
-		    except:
-			continue
+                        if(checkInputFile(fileName)==True):
+                                jobNumber=-1
+    try:
+        fileBaseName=os.path.basename(fileName)
+    jobNumber=int(fileBaseName.split("_")[1])
+except:
+    continue
 
-		    if jobNumber in jobNumbers:
-			if not jobNumber in duplicatedJobs:  duplicatedJobs.append(jobNumber)
-			duplicatedFiles.append(fileName)
-		    else :
-			jobNumbers.append(jobNumber)
-			origFiles.append(fileName)
-			nOutFile += 1
-   	        else:
-		    print("   #corrupted file found : " + fileName)
-		    duplicatedFiles.append(fileName)
+    if jobNumber in jobNumbers:
+        if not jobNumber in duplicatedJobs:  duplicatedJobs.append(jobNumber)
+    duplicatedFiles.append(fileName)
+else :
+    jobNumbers.append(jobNumber)
+    origFiles.append(fileName)
+    nOutFile += 1
+else:
+        print("   #corrupted file found : " + fileName)
+    duplicatedFiles.append(fileName)
     return natural_sort(duplicatedFiles)
 
 
@@ -213,4 +212,3 @@ def addPrefixSuffixToFileList(Prefix, fileList, Suffix):
    for s in fileList:
       outList.append(Prefix+s+Suffix)
    return natural_sort(outList)
-
