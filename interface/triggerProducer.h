@@ -26,11 +26,13 @@ class triggerProducer : public inputBase {
   Bool_t   Run(Long64_t entry);
   
   void     SetTriggerMapName(TString n) { fTriggerMapName = n; }
+  void     SetTriggerPath(TString n) { fTriggerPath = n; }
 
   const char* GetHIEventContName() const { return fTriggerMapName.Data() ; }
   
  protected:
   TString                      fTriggerMapName;  // name of trigger map
+  TString                      fTriggerPath;
   triggerMap                  *fTriggerMap;      //! trigger map
   
  private:

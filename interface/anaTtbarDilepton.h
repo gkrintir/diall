@@ -57,6 +57,7 @@ public:
    void SetMetType(metType t)          { fMetType = t; }
    void SetMinPt(Float_t m)            { fMinPt = m; }
    void SetTriggerMapName(TString name){ fTriggerMapName = name ; }
+   void SetTriggerPath(TString name){ fTriggerPath = name ; }
    void SetRecoLeptonLeadName(TString name) { fRecoLeptonLeadName = name ; }
    void SetRecoLeptonSubleadName(TString name)  { fRecoLeptonSubleadName = name ; }
    void SetGenLeptonName(TString name)  { fGenLeptonName = name ; }
@@ -71,6 +72,7 @@ public:
    metType           fMetType;              //matching type (defines where to store)
    Float_t           fMinPt;                //minimum pT of particles
    TString           fTriggerMapName;       //name of triggers
+   TString           fTriggerPath;          //name of triggers 
    TString           fRecoLeptonLeadName;   //name of reco leptons
    TString           fRecoLeptonSubleadName;//name of reco leptons
    TString           fGenLeptonName;        //name of gen leptons

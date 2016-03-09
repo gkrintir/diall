@@ -99,6 +99,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   triggerProducer *p_trg = new triggerProducer("trigProd");
   p_trg->SetInput(hiEvtTree);
   p_trg->SetTriggerMapName("triggerMap");
+  p_trg->SetTriggerPath("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
   p_trg->SetEventObjects(fEventObjects);
   
   pfParticleProducer *p_pf = new pfParticleProducer("pfPartProd");
@@ -139,6 +140,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   anaEMu->ConnectEventObject(fEventObjects);
   anaEMu->SetHiEvtName("hiEventContainer");
   anaEMu->SetTriggerMapName("triggerMap");
+  anaEMu->SetTriggerPath("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
   anaEMu->SetParticlesName("pfParticles");
   anaEMu->SetRecoLeptonLeadName("lwElectronsReco");
   anaEMu->SetRecoLeptonSubleadName("lwMuonsReco");
@@ -152,6 +154,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   anaMuMu->ConnectEventObject(fEventObjects);
   anaMuMu->SetHiEvtName("hiEventContainer");
   anaMuMu->SetTriggerMapName("triggerMap");
+  anaMuMu->SetTriggerPath("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
   anaMuMu->SetParticlesName("pfParticles");
   anaMuMu->SetRecoLeptonLeadName("lwMuonsReco");
   anaMuMu->SetRecoLeptonSubleadName("lwMuonsReco");
@@ -165,6 +168,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   anaEleEle->ConnectEventObject(fEventObjects);
   anaEleEle->SetHiEvtName("hiEventContainer");
   anaEleEle->SetTriggerMapName("triggerMap");
+  anaEleEle->SetTriggerPath("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
   anaEleEle->SetParticlesName("pfParticles");
   anaEleEle->SetRecoLeptonLeadName("lwElectronsReco");
   anaEleEle->SetRecoLeptonSubleadName("lwElectronsReco");

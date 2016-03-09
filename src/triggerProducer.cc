@@ -72,55 +72,19 @@ Bool_t triggerProducer::Run(Long64_t entry) {
   if(!InitEventObjects()) return kFALSE;
   
   Int_t val[1000000] = {0};
-  //Int_t val[700000] = {0};
   TBranch *br[1000000];
   
   fChain->SetBranchStatus("*", 0);
-  //fChain->SetBranchStatus("LumiBlock", 1);
-  //fChain->SetBranchStatus("Run", 1);
+  fChain->SetBranchStatus(fTriggerPath.Data());
+  if (fChain->GetBranch(fTriggerPath.Data()))
+  {
+      fChain->SetBranchAddress(fTriggerPath.Data(),&val[entry],&br[entry]);
+      fChain->GetEntry(entry);
+      fTriggerMap->AddTrigger(fTriggerPath.Data(), val[entry]);
 
-  //fChain->SetBranchStatus("HLT_HIL3Mu15_v1", 1); //HLT_HIL3Mu15_v1
-  //fChain->SetBranchStatus("HLT_HISinglePhoton10_Eta3p1ForPPRef_v1", 1);
-  fChain->SetBranchStatus("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
-  /*
-  if (fChain->GetBranch("HLT_HIL3Mu15_v1"));
-  {
-    //fChain->SetBranchAddress("HLT_HIL3Mu15_v1",&val[entry],&br[entry]);
-      fChain->SetBranchAddress("HLT_HIL3Mu15_v1",&val);
-      fChain->GetEntry(entry);
-      fTriggerMap->AddTrigger("HLT_HIL3Mu15_v1", val);
   }
-  */
-  //if (fChain->GetBranch("HLT_HISinglePhoton10_Eta3p1ForPPRef_v1"))
-  //{
-  //    fChain->SetBranchAddress("HLT_HISinglePhoton10_Eta3p1ForPPRef_v1",&val[entry],&br[entry]);
-  //    fChain->GetEntry(entry);
-  //    fTriggerMap->AddTrigger("HLT_HISinglePhoton10_Eta3p1ForPPRef_v1", val[entry]);
-  // }
-  
-  if (fChain->GetBranch("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1"))
-  {
-      fChain->SetBranchAddress("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1",&val[entry],&br[entry]);                                  
-      fChain->GetEntry(entry);                                                                                                                                                                     
-      fTriggerMap->AddTrigger("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1", val[entry]);                                                                                                                     
-  }    
-  /*
-  if (fChain->GetBranch("LumiBlock"));
-  {
-      fChain->SetBranchAddress("LumiBlock",&val);
-      fChain->GetEntry(entry);
 
-      std::cout<< " !!!!!!!!!!!!!!!! "<< val <<std::endl;
-      fTriggerMap->AddTrigger("LumiBlock", val);
-  }
-  if (fChain->GetBranch("Run"))
-  {
-      fChain->SetBranchAddress("Run",&val[entry],&br[entry]);
-      fChain->GetEntry(entry);
-      fTriggerMap->AddTrigger("Run", val[entry]);
-  }
-  //fTriggerMap->PrintTriggers();
-  */
+
   return kTRUE; 
 }
 

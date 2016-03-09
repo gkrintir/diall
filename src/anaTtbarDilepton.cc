@@ -80,11 +80,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
      fTriggerMap = dynamic_cast<triggerMap*>(fEventObjects->FindObject(fTriggerMapName.Data()));
    }
    if(!fTriggerMap) { Printf("No %s TriggerMap found", fTriggerMapName.Data());  }
-   //fTriggerMap->PrintTriggers();
-   //std::cout<< fTriggerMap->TriggerFired("HLT_HIL2Mu7_NHitQ10_v1") <<std::endl;
-   //if(!fTriggerMap->TriggerFired("HLT_HIL3Mu15ForPPRef_v1")) return;
-   //if(!fTriggerMap->TriggerFired("HLT_HISinglePhoton10_Eta3p1ForPPRef_v1")) return;
-   if(!fTriggerMap->TriggerFired("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1")) return;
+   if(!fTriggerMap->TriggerFired(fTriggerPath.Data())) return;
    //fTriggerMap->PrintTriggers();
       
    fNEvents->Fill(2); //only for now!

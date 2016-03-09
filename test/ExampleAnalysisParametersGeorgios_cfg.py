@@ -32,11 +32,11 @@ centralityRequirements={"inc":[0,200],
 
 
 #sample=tt_PbPb
-sample=DY_PbPb
+#sample=DY_PbPb
 #sample=W_PbPb
 #sample=WW_PbPb 
 #sample=QCD_PbPb
-#sample=data_pp 
+sample=data_pp 
 
 centralityBins=centralityRequirements["inc"]
 #centralityBins=centralityRequirements["0to20"]
@@ -66,7 +66,7 @@ config = cms.PSet(
         #'root://cmsxrootd.fnal.gov//store/user/gkrintir/TopHI/HighPtLowerPhotons_Run2015E-PromptReco-v1_v1/HighPtLowerPhotons/crab_TopHI/160111_200108/0000/HiForestAOD_9.root',
         #'root://cmsxrootd.fnal.gov//store/user/gkrintir/TopHI/HighPtLowerPhotons_Run2015E-PromptReco-v1_v1/HighPtLowerPhotons/crab_TopHI/160111_200108/0000/HiForestAOD_10.root'
         ), #fillFromStore(sample[1]) 
-    maxEvents = cms.int32(500),#-1),
+    maxEvents = cms.int32(5000),#-1),
     minCentrality = cms.int32(centralityBins[0]),
     maxCentrality = cms.int32(centralityBins[1])#,
    # anaFile = cms.int32(options.anaFile)

@@ -41,13 +41,13 @@ def fillFromStore(dir,ffile=0,step=-1,generatePfn=True):
             if l.find('.root')<0 : continue
             #if l.find('step3')<0 : continue #RECO files
             #if(l.find('/mnt/hadoop/cms')>=0) : #/mnt/hadoop/cms 
-                newl = l.replace('/mnt/hadoop/cms','')
+            newl = l.replace('/mnt/hadoop/cms','')
             xrootdName=prefix+newl
             #xrootdName=xrootdName.replace('/eos/uscms/','')
-                #print 'prefix'
-                #print prefix
-                print 'xrootdName: %s' % xrootdName
-                    print l
+            #print 'prefix'
+            #print prefix
+            print 'xrootdName: %s' % xrootdName
+            print l
             localdataset.extend( [ xrootdName ] )
         return localdataset
     elif dir.find('/store/')==0:
@@ -142,26 +142,26 @@ def checkStoreForDuplicates(outdir):
                 fileName=fileLine
                 if(isCastor) : fileName = fileLine.split()[8]
 
-                        if(checkInputFile(fileName)==True):
-                                jobNumber=-1
-    try:
-        fileBaseName=os.path.basename(fileName)
-    jobNumber=int(fileBaseName.split("_")[1])
-except:
-    continue
-
-    if jobNumber in jobNumbers:
-        if not jobNumber in duplicatedJobs:  duplicatedJobs.append(jobNumber)
-    duplicatedFiles.append(fileName)
-else :
-    jobNumbers.append(jobNumber)
-    origFiles.append(fileName)
-    nOutFile += 1
-else:
-        print("   #corrupted file found : " + fileName)
-    duplicatedFiles.append(fileName)
+                if(checkInputFile(fileName)==True):
+                    jobNumber=-1
+                    try:
+                        fileBaseName=os.path.basename(fileName)
+                        jobNumber=int(fileBaseName.split("_")[1])
+                    except:
+                        continue
+                    
+                    if jobNumber in jobNumbers:
+                        if not jobNumber in duplicatedJobs:  duplicatedJobs.append(jobNumber)
+                        duplicatedFiles.append(fileName)
+                    else :
+                        jobNumbers.append(jobNumber)
+                        origFiles.append(fileName)
+                        nOutFile += 1
+                else:
+                    print("   #corrupted file found : " + fileName)
+                    duplicatedFiles.append(fileName)
     return natural_sort(duplicatedFiles)
-
+                
 
 """
 clean up for duplicats in the storage area
