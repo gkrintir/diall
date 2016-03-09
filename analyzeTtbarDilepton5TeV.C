@@ -138,7 +138,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   anaTtbarDilepton *anaEMu = new anaTtbarDilepton("anaEMu","anaEMu");
   anaEMu->ConnectEventObject(fEventObjects);
   anaEMu->SetHiEvtName("hiEventContainer");
-  //anaEMu->SetTriggerMapName("triggerMap");
+  anaEMu->SetTriggerMapName("triggerMap");
   anaEMu->SetParticlesName("pfParticles");
   anaEMu->SetRecoLeptonLeadName("lwElectronsReco");
   anaEMu->SetRecoLeptonSubleadName("lwMuonsReco");
@@ -151,7 +151,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   anaTtbarDilepton *anaMuMu = new anaTtbarDilepton("anaMuMu","anaMuMu");
   anaMuMu->ConnectEventObject(fEventObjects);
   anaMuMu->SetHiEvtName("hiEventContainer");
-  //anaMuMu->SetTriggerMapName("triggerMap");
+  anaMuMu->SetTriggerMapName("triggerMap");
   anaMuMu->SetParticlesName("pfParticles");
   anaMuMu->SetRecoLeptonLeadName("lwMuonsReco");
   anaMuMu->SetRecoLeptonSubleadName("lwMuonsReco");
@@ -164,7 +164,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   anaTtbarDilepton *anaEleEle = new anaTtbarDilepton("anaEleEle","anaEleEle");
   anaEleEle->ConnectEventObject(fEventObjects);
   anaEleEle->SetHiEvtName("hiEventContainer");
-  //anaEleEle->SetTriggerMapName("triggerMap");
+  anaEleEle->SetTriggerMapName("triggerMap");
   anaEleEle->SetParticlesName("pfParticles");
   anaEleEle->SetRecoLeptonLeadName("lwElectronsReco");
   anaEleEle->SetRecoLeptonSubleadName("lwElectronsReco");
@@ -206,16 +206,16 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   Printf("nentries: %lld  tot: %lld",nentries,entries_tot);
   for (Long64_t jentry=firstEvent; jentry<lastEvent; ++jentry) { 
     //  for (Long64_t jentry=0; jentry<nentries;jentry++) {
-    if (jentry%10000==0) Printf("Processing event %d  %d",(int)(jentry), (int)(lastEvent));
+    if (jentry%1000==0) Printf("Processing event %d  %d",(int)(jentry), (int)(lastEvent));
     //Run producers
     if (jentry>=entries_tot) break;
     // Printf("produce hiEvent");
     if(!p_evt->Run(jentry));   //hi event properties
 
-    //if(!p_trg->Run(jentry));
+    if(!p_trg->Run(jentry));
     if(!p_mu->Run(jentry)); //lepton collection
     if(!p_ele->Run(jentry)); //lepton collection
-    if(!p_pf->Run(jentry));    //pf particles
+    //if(!p_pf->Run(jentry));    //pf particles
     if(!p_pfJet->Run(jentry)); //jets
     
     //Execute all analysis tasks

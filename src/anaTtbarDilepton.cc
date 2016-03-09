@@ -2,6 +2,8 @@
 #include "UserCode/diall/interface/anaTtbarDilepton.h"
 #include "UserCode/diall/interface/diParticle.h"
 #include "UserCode/diall/interface/genParticle.h"
+#include "UserCode/diall/interface/lwElectron.h"
+#include "UserCode/diall/interface/lwMuon.h"
 #include "UserCode/diall/interface/lwJetContainer.h"
 #include "UserCode/diall/interface/particleBase.h"
 #include "UserCode/diall/interface/pfParticle.h"
@@ -55,8 +57,8 @@ anaTtbarDilepton::~anaTtbarDilepton()
 //----------------------------------------------------------
 void anaTtbarDilepton::Exec(Option_t * /*option*/)
 {
-
-   //printf("anaTtbarDilepton executing\n");
+ 
+   printf("anaTtbarDilepton executing\n");
    //if(!SelectEvent()) return;
 
    TLorentzVector met;
@@ -77,10 +79,12 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    if(!fTriggerMap && !fTriggerMapName.IsNull()) {
      fTriggerMap = dynamic_cast<triggerMap*>(fEventObjects->FindObject(fTriggerMapName.Data()));
    }
-   //if(!fTriggerMap) { Printf("No %s TriggerMap found", fTriggerMapName.Data());  }
-
-   //if(!fTriggerMap->TriggerFired("HLT_HIL3Mu15_v1")) return;
-   //std::cout<< fTriggerMap->TriggerFired("HLT_HIL3Mu15_v1") <<std::endl;
+   if(!fTriggerMap) { Printf("No %s TriggerMap found", fTriggerMapName.Data());  }
+   //fTriggerMap->PrintTriggers();
+   //std::cout<< fTriggerMap->TriggerFired("HLT_HIL2Mu7_NHitQ10_v1") <<std::endl;
+   //if(!fTriggerMap->TriggerFired("HLT_HIL3Mu15ForPPRef_v1")) return;
+   //if(!fTriggerMap->TriggerFired("HLT_HISinglePhoton10_Eta3p1ForPPRef_v1")) return;
+   if(!fTriggerMap->TriggerFired("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1")) return;
    //fTriggerMap->PrintTriggers();
       
    fNEvents->Fill(2); //only for now!
@@ -101,11 +105,15 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
      fRecoLeptonSublead = dynamic_cast<TClonesArray*>(fEventObjects->FindObject(fRecoLeptonSubleadName.Data()));
      if(!fRecoLeptonSublead) { Printf("No %s RecoLeptonSublead found", fRecoLeptonSubleadName.Data()); return; } 
    }
-
-
+   
+   
    const Int_t nRecoLeptonSublead = fRecoLeptonSublead->GetEntriesFast();
    fNRecoLeptonSublead.push_back(nRecoLeptonSublead);
    
+ 
+     //else if (CheckPid(part2))  lwMuon *muon = dynamic_cast<lw*>(part2);
+   
+
    //Get gen lepton
    if(!fGenLepton && !fGenLeptonName.IsNull()) {
      fGenLepton = dynamic_cast<TClonesArray*>(fEventObjects->FindObject(fGenLeptonName.Data()));
@@ -159,7 +167,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
 	for (int ijet = 0; ijet < fRecoJets->GetNJets(); ijet++) 
 	{
 	    lwJet * jet = dynamic_cast<lwJet*>(fRecoJets->GetJet(ijet));
-	    if(jet->DeltaR(pPart1)<0.4 && jet->DeltaR(pPart2)<0.4) 
+	    if(jet->DeltaR(pPart1)>0.4 && jet->DeltaR(pPart2)>0.4) 
 	      fRecoRemovalJets.push_back(jet);
 	}
     }
@@ -175,7 +183,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    }
    
    fNBJetsIncl.push_back(nbjets);
-   
+   /*
    //Get particles from which MET will be calculated
    if(!fParticles && !fParticlesName.IsNull()) {
      //fEventObjects->Print();
@@ -191,7 +199,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
      Printf("%s: WARNING: Couldn't locate %s branch",GetName(),fParticlesName.Data());
      return;
    }
-   
+   */
    /*   
    //Double_t cent = 5.;//fHiEvent->GetCentrality();
    TLorentzVector p4(0.,0.,0.,0.);
@@ -263,6 +271,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
    //int error;
    //fuParaZllPt->Fill(fParticles->GetEntriesFast());
    Bool_t filled = false; Bool_t filled_Rec2jets = false;
+   std::cout<< fDileptonCands << std::endl;
    for(int i = 0; i<fDileptonCands; ++i) 
    { 
        diParticle *pPart = (diParticle*)fDilepton->At(i);
@@ -288,8 +297,38 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
 	         fLeadRecoLeptonPt.push_back(pPart2->Pt());
 		 fLeadRecoLeptonAbsEta.push_back(TMath::Abs(pPart2->Eta()));
 		 fLeadRecoLeptonEta.push_back(pPart2->Eta());
+	     }	
+	     std::cout<< pPart1->GetId() <<std::endl;
+	     if(pPart1->GetId()==11)
+	     {
+		 lwElectron *electronLead = dynamic_cast<lwElectron*>(pPart1);
+		 fEleEta.push_back(pPart1->Eta());
+		 fdEtaAtVtx.push_back(electronLead->GetdEta());
+		 fdPhiAtVtx.push_back(electronLead->GetdPhi());   
+		 fSigmaIEtaIEta.push_back(electronLead->GetSigmaIEtaIEta());
+		 fHoverE.push_back(electronLead->GetHoverE());       
+		 fDxy.push_back(electronLead->GetD0());          
+		 fDz.push_back(electronLead->GetDZ());           
+		 fEoverPInv.push_back(electronLead->GetEoverPInv());    
+		 fMissHits.push_back(electronLead->GetMissHits());     
+		 fConversionVeto.push_back(electronLead->GetConversionVeto());
 	     }
-	     if(!filled)
+	     if(pPart2->GetId()==11)
+	     {
+		 lwElectron *electronSublead = dynamic_cast<lwElectron*>(pPart2);
+		 fEleEta.push_back(pPart2->Eta());
+		 fdEtaAtVtx.push_back(electronSublead->GetdEta());
+		 fdPhiAtVtx.push_back(electronSublead->GetdPhi());   
+		 fSigmaIEtaIEta.push_back(electronSublead->GetSigmaIEtaIEta());
+		 fHoverE.push_back(electronSublead->GetHoverE());       
+		 fDxy.push_back(electronSublead->GetD0());          
+		 fDz.push_back(electronSublead->GetDZ());           
+		 fEoverPInv.push_back(electronSublead->GetEoverPInv());    
+		 fMissHits.push_back(electronSublead->GetMissHits());     
+		 fConversionVeto.push_back(electronSublead->GetConversionVeto());
+	     }
+	     
+   	     if(!filled)
 	     { 
 	         fNEvents->Fill(4);
 		 for (unsigned int ijet = 0; ijet < fRecoRemovalJets.size(); ijet++) 
@@ -299,7 +338,7 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
 		     {
 		         fLeadJetPt.push_back(pt);
 		     }
-		     ht += fRecoRemovalJets[ijet]->Pt();
+		     ht += pt;
 		 }
 		 fHT.push_back(ht);
 		 fNJets.push_back(nRecoJets);
@@ -361,7 +400,18 @@ void anaTtbarDilepton::Exec(Option_t * /*option*/)
      fLeadRecoLeptonAbsEta.clear();   
      fLeadRecoLeptonEta.clear();      
      fNJets.clear();              
-   
+
+     fEleEta.clear();
+     fdEtaAtVtx.clear();
+     fdPhiAtVtx.clear();
+     fSigmaIEtaIEta.clear();
+     fHoverE.clear();
+     fDxy.clear();
+     fDz.clear();
+     fEoverPInv.clear();
+     fMissHits.clear();
+     fConversionVeto.clear();
+     
      fDeltaPhi_Rec2jets.clear();  
      fMassDilepton_Rec2jets.clear();   
      fLeadJetPt_Rec2jets.clear(); 
@@ -482,6 +532,17 @@ anaTtbarDilepton::CreateOutputObjects() {
   fAnaTtbarDileptonInfo->Branch("fLeadRecoLeptonEta",&fLeadRecoLeptonEta);     
   fAnaTtbarDileptonInfo->Branch("fNJets",&fNJets);
 
+  fAnaTtbarDileptonInfo->Branch("fEleEta", &fEleEta);
+  fAnaTtbarDileptonInfo->Branch("fdEtaAtVtx", &fdEtaAtVtx);
+  fAnaTtbarDileptonInfo->Branch("fdPhiAtVtx", &fdPhiAtVtx);
+  fAnaTtbarDileptonInfo->Branch("fSigmaIEtaIEta", &fSigmaIEtaIEta);
+  fAnaTtbarDileptonInfo->Branch("fHoverE", &fHoverE);
+  fAnaTtbarDileptonInfo->Branch("fDxy", &fDxy);
+  fAnaTtbarDileptonInfo->Branch("fDz", &fDz);
+  fAnaTtbarDileptonInfo->Branch("fEoverPInv", &fEoverPInv);
+  fAnaTtbarDileptonInfo->Branch("fMissHits", &fMissHits);
+  fAnaTtbarDileptonInfo->Branch("fConversionVeto", &fConversionVeto);
+  
   fAnaTtbarDileptonInfo->Branch("fDeltaPhi_Rec2jets", &fDeltaPhi_Rec2jets);          
   fAnaTtbarDileptonInfo->Branch("fMassDilepton_Rec2jets",&fMassDilepton_Rec2jets);
   fAnaTtbarDileptonInfo->Branch("fLeadJetPt_Rec2jets",&fLeadJetPt_Rec2jets);
@@ -511,6 +572,8 @@ anaTtbarDilepton::FillDileptonArray(const Int_t nRecoLeptonLead, const Int_t nRe
        Printf("%s ERROR: couldn't get leading lepton",GetName());
        continue;
      }
+     if (fRecoLeptonLeadName.Contains("Muon")) leptonLead->SetId(13);
+     else leptonLead->SetId(11);
      //CheckPid(leptonLead);
      int init = 0;
      if (fRecoLeptonLeadName.EqualTo(fRecoLeptonSubleadName))
@@ -525,6 +588,9 @@ anaTtbarDilepton::FillDileptonArray(const Int_t nRecoLeptonLead, const Int_t nRe
          continue;
        }
        //CheckPid(leptonSublead);
+       if (fRecoLeptonSubleadName.Contains("Muon")) leptonSublead->SetId(13);
+       else leptonSublead->SetId(11);
+
        TLorentzVector l1 = leptonLead->GetLorentzVector();
        TLorentzVector l2 = leptonSublead->GetLorentzVector();
        TLorentzVector dilepton = l1 + l2;
@@ -544,7 +610,7 @@ anaTtbarDilepton::FillDileptonArray(const Int_t nRecoLeptonLead, const Int_t nRe
                         dilepton.Eta(),
                         dilepton.Phi(),
                         dilepton.M(),
-                        11); //dummy PDG
+                        0); //dummy PDG
            pPart->SetCharge(0);
            pPart->AddParticle(leptonLead);
            pPart->AddParticle(leptonSublead);

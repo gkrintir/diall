@@ -1,8 +1,8 @@
 #ifndef ForestPFs_h
 #define ForestPFs_h
 
-#define maxPF 40000
-
+#include <iostream>
+#include <vector>
 #include "TBranch.h"
 
 class ForestPFs {
@@ -11,15 +11,15 @@ public :
    ~ForestPFs(){};
 
    // Declaration of leaf types
-   Int_t           nPFpart;
-   Int_t           pfId[maxPF];   //[nPFpart]
-   Float_t         pfPt[maxPF];   //[nPFpart]
-   Float_t         pfVsPt[maxPF]; //[nPFpart]
-   Float_t         pfEta[maxPF];  //[nPFpart]
-   Float_t         pfPhi[maxPF];  //[nPFpart]
-   Float_t         vn[5][15];
-   Float_t         psin[5][15];
-   Float_t         sumpt[15];
+   Int_t                      nPFpart;
+   std::vector<int>           *pfId = 0;
+   std::vector<float>         *pfPt = 0;
+   std::vector<float>         *pfVsPt = 0;
+   std::vector<float>         *pfEta = 0;
+   std::vector<float>         *pfPhi = 0;
+   Float_t                    vn[5][15];
+   Float_t                    psin[5][15];
+   Float_t                    sumpt[15];
 
    // List of branches
    TBranch        *b_nPFpart; //!
@@ -28,8 +28,8 @@ public :
    TBranch        *b_pfVsPt;  //!
    TBranch        *b_pfEta;   //!
    TBranch        *b_pfPhi;   //!
-   TBranch        *b_vn;
-   TBranch        *b_psin;
-   TBranch        *b_sumpt;
+   TBranch        *b_vn;      //!
+   TBranch        *b_psin;    //!
+   TBranch        *b_sumpt;   //!
 };
 #endif

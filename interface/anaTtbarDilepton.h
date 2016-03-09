@@ -103,7 +103,8 @@ public:
    std::vector<Int_t>     fNJetsIncl;           //!# selected jets in event
    std::vector<Int_t>     fNBJetsIncl;          //!# selected b-tagged jets in event
    std::vector<Float_t>   fBJetsDiscr;          //!# selected b-tagged jets in event
-   
+
+   //Dilepton-related variables
    std::vector<Float_t>   fHT;                  //!# HT varialbe
    std::vector<Float_t>   fMassDilepton;        //!# dilepton mass varialbe
    std::vector<Float_t>   fLeadJetPt;           //!# dilepton mass varialbe
@@ -112,7 +113,18 @@ public:
    std::vector<Float_t>   fLeadRecoLeptonEta;   //!# dilepton mass varialbe
    std::vector<Int_t>     fNJets;               //!# dilepton mass varialbe
 
-   
+   //Electron-related variables
+   std::vector<Float_t>   fEleEta;        // !# electron varialbe
+   std::vector<Float_t>   fdEtaAtVtx;     // !# electron varialbe
+   std::vector<Float_t>   fdPhiAtVtx;     // !# electron varialbe
+   std::vector<Float_t>   fSigmaIEtaIEta; // !# electron varialbe
+   std::vector<Float_t>   fHoverE;        // !# electron varialbe
+   std::vector<Float_t>   fDxy;           // !# electron varialbe
+   std::vector<Float_t>   fDz;            // !# electron varialbe
+   std::vector<Float_t>   fEoverPInv;     // !# electron varialbe
+   std::vector<Int_t>     fMissHits;      // !# electron varialbe
+   std::vector<Bool_t>    fConversionVeto;// !# electron varialbe
+    
    std::vector<Double_t>  fDeltaPhi_Rec2jets;       //!# HT varialbe
    std::vector<Float_t>   fMassDilepton_Rec2jets;   //!# dilepton mass varialbe
    std::vector<Float_t>   fLeadJetPt_Rec2jets;      //!# dilepton mass varialbe

@@ -50,8 +50,8 @@ lwElectronProducer::lwElectronProducer(const char *name) :
   flwElectronsGeneName("lwElectronsGene"),
   flwElectronsGene(0x0),
   fElectrons(),
-  fPtMin(16.),
-  fMaxEtaAbs(2.1),
+  fPtMin(20.),
+  fMaxEtaAbs(2.4),
   fMaxdEtaAtVtxBarrel(0.0094),  
   fMaxdPhiAtVtxBarrel(0.0296),
   fMaxSigmaIEtaIEtaBarrel(0.0101),
@@ -177,7 +177,6 @@ Bool_t lwElectronProducer::InitEventObjects() {
       fEventObjects->Add(flwElectronsReco);
     }
     if(!fEventObjects->FindObject(flwElectronsGeneName) && !flwElectronsGeneName.IsNull()) {
-      std::cout << "mpika!!!! "<<  flwElectronsGeneName.Data()<< std::endl;
       flwElectronsGene = new TClonesArray("genParticle");
       flwElectronsGene->SetName(flwElectronsGeneName);
       fEventObjects->Add(flwElectronsGene);
@@ -211,6 +210,15 @@ Bool_t lwElectronProducer::Run(Long64_t entry) {
 				     0,
 				     i);
     ele->SetCharge(fElectrons.eleCharge->at(i));
+    ele->SetdEta(fElectrons.eledEtaAtVtx->at(i));
+    ele->SetdPhi(fElectrons.eledPhiAtVtx->at(i));
+    ele->SetHoverE(fElectrons.eleHoverE->at(i));
+    ele->SetD0(fElectrons.eleD0->at(i));
+    ele->SetDZ(fElectrons.eleDz->at(i));
+    ele->SetSigmaIEtaIEta(fElectrons.eleSigmaIEtaIEta->at(i));
+    ele->SetEoverPInv(fElectrons.eleEoverPInv->at(i));
+    ele->SetMissHits(fElectrons.eleMissHits->at(i));
+    //ele->SetConversionVeto(bool val); //To be added!!!!
     (*flwElectronsReco)[eleCount] = ele;
     ++eleCount;
   }
@@ -245,7 +253,9 @@ Bool_t lwElectronProducer::AcceptElectron(Int_t i) {
   //electron quality selection 
   //https://twiki.cern.ch/twiki/bin/viewauth/CMS/CutBasedElectronIdentificationRun2#Spring15_selection_50ns (medium WP)
   //no isolation for the moment!!!
-
+  
+  if((fElectrons.elePt->at(i))<fPtMin)             return kFALSE;
+  if((fabs(fElectrons.eleEta->at(i)))>fMaxEtaAbs)  return kFALSE;
   if(fabs(fElectrons.eleSCEta->at(i))<1.479) {
     if(  fabs(fElectrons.eledEtaAtVtx->at(i))<fMaxdEtaAtVtxBarrel
 	 && fabs(fElectrons.eledPhiAtVtx->at(i))<fMaxdPhiAtVtxBarrel

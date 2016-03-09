@@ -32,6 +32,9 @@ Bool_t pfParticleProducer::Init() {
   if(!inputBase::Init()) return kFALSE;
   
   if(fInputMode==hiForest) {
+    fChain->SetBranchStatus("*", 0);
+    fChain->SetBranchStatus("nPF*", 1);
+    fChain->SetBranchStatus("pf*", 1);
     if (fChain->GetBranch("nPFpart"))
       fChain->SetBranchAddress("nPFpart", &fPFs.nPFpart, &fPFs.b_nPFpart);
     if (fChain->GetBranch("pfId"))
@@ -82,19 +85,19 @@ Bool_t pfParticleProducer::Run(Long64_t entry) {
   for(Int_t i = 0; i<fPFs.nPFpart; i++) {
     Double_t mass = 0.;
     Int_t charge = 0;
-    if(fPFs.pfId[i]==1) { //charged hadron, assume pion mass
+    if(fPFs.pfId->at(i)==1) { //charged hadron, assume pion mass
       mass   = 0.13957;
       charge = 1;
     }
 
     pfParticle *pPart = new ((*fpfParticles)[pfCount])
-      pfParticle(fPFs.pfPt[i],
-                 fPFs.pfEta[i],
-                 fPFs.pfPhi[i],
+      pfParticle(fPFs.pfPt->at(i),
+                 fPFs.pfEta->at(i),
+                 fPFs.pfPhi->at(i),
                  mass,
-                 fPFs.pfId[i]);
+                 fPFs.pfId->at(i));
     pPart->SetCharge(charge);
-    pPart->SetPtVS(fPFs.pfVsPt[i]);
+    pPart->SetPtVS(fPFs.pfVsPt->at(i));
     ++pfCount;
   }
   fpfParticles->Sort();

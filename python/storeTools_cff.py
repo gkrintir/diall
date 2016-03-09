@@ -34,8 +34,9 @@ def fillFromStore(dir,ffile=0,step=-1,generatePfn=True):
         prefix='root://cmsxrootd.fnal.gov//'
         #lscommand = 'lcg-ls -D srmv2 -b %s'%dir
         lscommand = 'lcg-ls %s' % dir
-  	#print lscommand
         lsout = commands.getstatusoutput(lscommand)[1].split()
+        print lscommand
+
         for l in lsout :
 	    #print l 
             if l.find('.root')<0 : continue
