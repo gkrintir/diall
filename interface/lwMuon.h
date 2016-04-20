@@ -15,14 +15,27 @@ class lwMuon : public particleBase {
   lwMuon(const lwMuon& obj); // copy constructor
   lwMuon& operator=(const lwMuon& other); // assignment
 
-  void     SetClosestGen(Int_t i)      { fMatchId1 = i; }
-  void     SetClosestPF(Int_t i)       { fMatchId2  = i; }
+  Int_t       GetClosestGen()   const     { return fMatchId1; }
+  Int_t       GetClosestPF()    const     { return fMatchId2; }
+  Float_t     GetPFChIso() {return fPFChIso ; }
+  Float_t     GetPFPhoIso() {return fPFPhoIso ; }
+  Float_t     GetPFNeuIso() {return fPFNeuIso ; }
+  Float_t     GetPFPUIso() {return fPFPUIso ; }
 
-  Int_t    GetClosestGen()   const     { return fMatchId1; }
-  Int_t    GetClosestPF()    const     { return fMatchId2; }
+  void        SetClosestGen(Int_t i)      { fMatchId1 = i; }
+  void        SetClosestPF(Int_t i)       { fMatchId2  = i; }
+  void        SetPFChIso(float val) {fPFChIso = val; }
+  void        SetPFPhoIso(float val) {fPFPhoIso = val; }
+  void        SetPFNeuIso(float val) {fPFNeuIso = val; }
+  void        SetPFPUIso(float val) {fPFPUIso = val; }
   
  protected:
   
+  Float_t                      fPFChIso;
+  Float_t                      fPFPhoIso;
+  Float_t                      fPFNeuIso;
+  Float_t                      fPFPUIso;
+
   ClassDef(lwMuon,1)
 };
 #endif

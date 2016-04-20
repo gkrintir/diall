@@ -17,8 +17,12 @@ inputBase("lwElectronProducer"),
   flwElectronsGeneName("lwElectronsGene"),
   flwElectronsGene(0x0),
   fElectrons(),
-  fPtMin(18.), 
+  fPtMin(0.), 
   fMaxEtaAbs(2.4),
+  fVetoId(0),
+  fLooseId(0),
+  fMediumId(1),
+  fTightId(0),
   fMaxdEtaAtVtxBarrel(0.0094),  
   fMaxdPhiAtVtxBarrel(0.0296),
   fMaxSigmaIEtaIEtaBarrel(0.0101),
@@ -27,7 +31,7 @@ inputBase("lwElectronProducer"),
   fMaxDzBarrel(0.238),
   fMaxEoverPInvBarrel(0.118),
   fMaxMissHitsBarrel(2),
-  fPassConversionVetoBarrel(kTRUE),
+  fPassConversionVetoBarrel(1),
   fMaxdEtaAtVtxEndcap(0.00773),  
   fMaxdPhiAtVtxEndcap(0.148),
   fMaxSigmaIEtaIEtaEndcap(0.0287),
@@ -36,7 +40,7 @@ inputBase("lwElectronProducer"),
   fMaxDzEndcap(0.572),
   fMaxEoverPInvEndcap(0.104),
   fMaxMissHitsEndcap(1),
-  fPassConversionVetoEndcap(kTRUE)
+  fPassConversionVetoEndcap(1)
 
 {
   //default constructor
@@ -45,13 +49,17 @@ inputBase("lwElectronProducer"),
 //__________________________________________________________
 lwElectronProducer::lwElectronProducer(const char *name) :
   inputBase(name),
-  flwElectronsRecoName("lwElectronsReco"),
+  flwElectronsRecoName(""),
   flwElectronsReco(0x0),
-  flwElectronsGeneName("lwElectronsGene"),
+  flwElectronsGeneName(""),
   flwElectronsGene(0x0),
   fElectrons(),
-  fPtMin(16.),
+  fPtMin(30.),
   fMaxEtaAbs(2.1),
+  fVetoId(0),
+  fLooseId(0),
+  fMediumId(1),
+  fTightId(0),
   fMaxdEtaAtVtxBarrel(0.0094),  
   fMaxdPhiAtVtxBarrel(0.0296),
   fMaxSigmaIEtaIEtaBarrel(0.0101),
@@ -60,7 +68,7 @@ lwElectronProducer::lwElectronProducer(const char *name) :
   fMaxDzBarrel(0.238),
   fMaxEoverPInvBarrel(0.118),
   fMaxMissHitsBarrel(2),
-  fPassConversionVetoBarrel(kTRUE),
+  fPassConversionVetoBarrel(1),
   fMaxdEtaAtVtxEndcap(0.00773),  
   fMaxdPhiAtVtxEndcap(0.148),
   fMaxSigmaIEtaIEtaEndcap(0.0287),
@@ -69,7 +77,7 @@ lwElectronProducer::lwElectronProducer(const char *name) :
   fMaxDzEndcap(0.572),
   fMaxEoverPInvEndcap(0.104),
   fMaxMissHitsEndcap(1),
-  fPassConversionVetoEndcap(kTRUE)
+  fPassConversionVetoEndcap(1)
 {
   //standard constructor
 }
@@ -125,6 +133,14 @@ Bool_t lwElectronProducer::Init() {
       fChain->SetBranchAddress("eleSCEtaWidth", &fElectrons.eleSCEtaWidth, &fElectrons.b_eleSCEtaWidth);
     if (fChain->GetBranch("eleSCPhiWidth"))
       fChain->SetBranchAddress("eleSCPhiWidth", &fElectrons.eleSCPhiWidth, &fElectrons.b_eleSCPhiWidth);
+    if (fChain->GetBranch("eleIDVeto"))
+      fChain->SetBranchAddress("eleIDVeto", &fElectrons.eleIDVeto, &fElectrons.b_eleIDVeto);
+    if (fChain->GetBranch("eleIDLoose"))
+      fChain->SetBranchAddress("eleIDLoose", &fElectrons.eleIDLoose, &fElectrons.b_eleIDLoose);
+    if (fChain->GetBranch("eleIDMedium"))
+      fChain->SetBranchAddress("eleIDMedium", &fElectrons.eleIDMedium, &fElectrons.b_eleIDMedium);
+    if (fChain->GetBranch("eleIDTight"))
+      fChain->SetBranchAddress("eleIDTight", &fElectrons.eleIDTight, &fElectrons.b_eleIDTight);
     if (fChain->GetBranch("eleHoverE"))
       fChain->SetBranchAddress("eleHoverE", &fElectrons.eleHoverE, &fElectrons.b_eleHoverE);
     if (fChain->GetBranch("eleSigmaIEtaIEta"))
@@ -149,15 +165,33 @@ Bool_t lwElectronProducer::Init() {
       fChain->SetBranchAddress("eleDzErr", &fElectrons.eleDzErr, &fElectrons.b_eleDzErr);
     if (fChain->GetBranch("eleMissHits"))
       fChain->SetBranchAddress("eleMissHits", &fElectrons.eleMissHits, &fElectrons.b_eleMissHits);
+    if (fChain->GetBranch("elepassConversionVeto"))
+      fChain->SetBranchAddress("elepassConversionVeto", &fElectrons.elepassConversionVeto, &fElectrons.b_elepassConversionVeto);
+    
     if (fChain->GetBranch("elePFChIso"))
       fChain->SetBranchAddress("elePFChIso", &fElectrons.elePFChIso, &fElectrons.b_elePFChIso);
     if (fChain->GetBranch("elePFPhoIso"))
       fChain->SetBranchAddress("elePFPhoIso", &fElectrons.elePFPhoIso, &fElectrons.b_elePFPhoIso);
     if (fChain->GetBranch("elePFNeuIso"))
       fChain->SetBranchAddress("elePFNeuIso", &fElectrons.elePFNeuIso, &fElectrons.b_elePFNeuIso);
-    if (fChain->GetBranch("elePFPUIso"))
-      fChain->SetBranchAddress("elePFPUIso", &fElectrons.elePFPUIso, &fElectrons.b_elePFPUIso);
-        
+
+    if (fChain->GetBranch("elePFChIso03"))
+      fChain->SetBranchAddress("elePFChIso03", &fElectrons.elePFChIso03, &fElectrons.b_elePFChIso03);
+    if (fChain->GetBranch("elePFPhoIso03"))
+      fChain->SetBranchAddress("elePFPhoIso03", &fElectrons.elePFPhoIso03, &fElectrons.b_elePFPhoIso03);
+    if (fChain->GetBranch("elePFNeuIso03"))
+      fChain->SetBranchAddress("elePFNeuIso03", &fElectrons.elePFNeuIso03, &fElectrons.b_elePFNeuIso03);
+
+    if (fChain->GetBranch("elePFChIso04"))
+      fChain->SetBranchAddress("elePFChIso04", &fElectrons.elePFChIso04, &fElectrons.b_elePFChIso04);
+    if (fChain->GetBranch("elePFPhoIso04"))
+      fChain->SetBranchAddress("elePFPhoIso04", &fElectrons.elePFPhoIso04, &fElectrons.b_elePFPhoIso04);
+    if (fChain->GetBranch("elePFNeuIso04"))
+      fChain->SetBranchAddress("elePFNeuIso04", &fElectrons.elePFNeuIso04, &fElectrons.b_elePFNeuIso04);
+
+    if (fChain->GetBranch("eleEffAreaTimesRho"))
+      fChain->SetBranchAddress("eleEffAreaTimesRho", &fElectrons.eleEffAreaTimesRho, &fElectrons.b_eleEffAreaTimesRho);
+
     fInit = kTRUE;
   }
   return kTRUE;
@@ -177,7 +211,7 @@ Bool_t lwElectronProducer::InitEventObjects() {
       fEventObjects->Add(flwElectronsReco);
     }
     if(!fEventObjects->FindObject(flwElectronsGeneName) && !flwElectronsGeneName.IsNull()) {
-      std::cout << "mpika!!!! "<<  flwElectronsGeneName.Data()<< std::endl;
+      //std::cout << "mpika!!!! "<<  flwElectronsGeneName.Data()<< std::endl;
       flwElectronsGene = new TClonesArray("genParticle");
       flwElectronsGene->SetName(flwElectronsGeneName);
       fEventObjects->Add(flwElectronsGene);
@@ -211,6 +245,30 @@ Bool_t lwElectronProducer::Run(Long64_t entry) {
 				     0,
 				     i);
     ele->SetCharge(fElectrons.eleCharge->at(i));
+    ele->SetVetoId(fElectrons.eleIDVeto->at(i));
+    ele->SetLooseId(fElectrons.eleIDLoose->at(i));
+    ele->SetMediumId(fElectrons.eleIDMedium->at(i));
+    ele->SetTightId(fElectrons.eleIDTight->at(i));
+    ele->SetdEta(fElectrons.eledEtaAtVtx->at(i));
+    ele->SetdPhi(fElectrons.eledPhiAtVtx->at(i));
+    ele->SetHoverE(fElectrons.eleHoverE->at(i));
+    ele->SetD0(fElectrons.eleD0->at(i));
+    ele->SetDZ(fElectrons.eleDz->at(i));
+    ele->SetSigmaIEtaIEta(fElectrons.eleSigmaIEtaIEta->at(i));
+    ele->SetEoverPInv(fElectrons.eleEoverPInv->at(i));
+    ele->SetMissHits(fElectrons.eleMissHits->at(i));
+    ele->SetConversionVeto(fElectrons.elepassConversionVeto->at(i)); 
+    ele->SetPFChIso(fElectrons.elePFChIso->at(i));
+    ele->SetPFPhoIso(fElectrons.elePFPhoIso->at(i));
+    ele->SetPFNeuIso(fElectrons.elePFNeuIso->at(i));
+    ele->SetPFChIso03(fElectrons.elePFChIso03->at(i));
+    ele->SetPFPhoIso03(fElectrons.elePFPhoIso03->at(i));
+    ele->SetPFNeuIso03(fElectrons.elePFNeuIso03->at(i));
+    ele->SetPFChIso04(fElectrons.elePFChIso04->at(i));
+    ele->SetPFPhoIso04(fElectrons.elePFPhoIso04->at(i));
+    ele->SetPFNeuIso04(fElectrons.elePFNeuIso04->at(i));
+    ele->SetEffAreaTimesRho(fElectrons.eleEffAreaTimesRho->at(i));
+
     (*flwElectronsReco)[eleCount] = ele;
     ++eleCount;
   }
@@ -245,7 +303,15 @@ Bool_t lwElectronProducer::AcceptElectron(Int_t i) {
   //electron quality selection 
   //https://twiki.cern.ch/twiki/bin/viewauth/CMS/CutBasedElectronIdentificationRun2#Spring15_selection_50ns (medium WP)
   //no isolation for the moment!!!
-
+  
+  if((fElectrons.elePt->at(i))<fPtMin)             return kFALSE;
+  if((fabs(fElectrons.eleEta->at(i)))>fMaxEtaAbs)  return kFALSE;
+  if(fVetoId!=0) if(fElectrons.eleIDVeto->at(i) != 1)            return kFALSE;
+  if(fLooseId!=0) if(fElectrons.eleIDLoose->at(i) != 1)            return kFALSE;
+  if(fMediumId!=0) if(fElectrons.eleIDMedium->at(i) != 1)            return kFALSE;
+  if(fTightId!=0) if(fElectrons.eleIDTight->at(i) != 1)            return kFALSE;
+								     
+  /*
   if(fabs(fElectrons.eleSCEta->at(i))<1.479) {
     if(  fabs(fElectrons.eledEtaAtVtx->at(i))<fMaxdEtaAtVtxBarrel
 	 && fabs(fElectrons.eledPhiAtVtx->at(i))<fMaxdPhiAtVtxBarrel
@@ -255,6 +321,7 @@ Bool_t lwElectronProducer::AcceptElectron(Int_t i) {
 	 && fabs(fElectrons.eleDz->at(i))<fMaxDzBarrel
 	 && fabs(fElectrons.eleEoverPInv->at(i))<fMaxEoverPInvBarrel
 	 && fElectrons.eleMissHits->at(i) <= fMaxMissHitsBarrel
+	 && fElectrons.elepassConversionVeto->at(i) == fPassConversionVetoBarrel
 	 ) return kTRUE;
     else return kFALSE;
   }
@@ -267,10 +334,13 @@ Bool_t lwElectronProducer::AcceptElectron(Int_t i) {
 	 && fabs(fElectrons.eleDz->at(i))<fMaxDzEndcap
 	 && fabs(fElectrons.eleEoverPInv->at(i))<fMaxEoverPInvEndcap
 	 && fElectrons.eleMissHits->at(i) <= fMaxMissHitsEndcap
+	 && fElectrons.elepassConversionVeto->at(i) == fPassConversionVetoEndcap
 	 ) return kTRUE;
     else return kFALSE;
   }
   else return kFALSE;
+  */
+  return kTRUE;
 
 }
 

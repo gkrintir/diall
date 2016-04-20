@@ -17,6 +17,8 @@
   <bin name="runPFvsCaloJetAnappData" file="runPFvsCaloJetAnappData.cc"></bin>
   <bin name="runTtbarEMuData5TeV"     file="runTtbarEMuData5TeV.cc"></bin>
   <bin name="runTtbarDilepton5TeV"     file="runTtbarDilepton5TeV.cc"></bin>
+  <bin name="runCountPrescalesForTtbarDilepton5TeVInE"     file="runCountPrescalesForTtbarDilepton5TeVInE.cc"></bin>
+  <bin name="runCountPrescalesForTtbarDilepton5TeVInMu"     file="runCountPrescalesForTtbarDilepton5TeVInMu.cc"></bin>
   <bin name="runGenvsCaloJetAna"      file="runGenvsCaloJetAna.cc"></bin>
   <bin name="runZJetMCResponse"       file="runZJetMCResponse.cc"></bin>
   <bin name="runZToMuMu"              file="runZToMuMu.cc"></bin>

@@ -4,6 +4,8 @@
 
 #include "UserCode/diall/interface/pfParticleProducerVector.h"
 
+#include <iostream>
+
 ClassImp(pfParticleProducerVector)
 
 //__________________________________________________________
@@ -32,7 +34,7 @@ Bool_t pfParticleProducerVector::Init() {
   if(!inputBase::Init()) return kFALSE;
   
   if(fInputMode==hiForest) {
-    fChain->SetBranchStatus("*", 0);
+    //fChain->SetBranchStatus("*", 0);
     fChain->SetBranchStatus("nPFpart", 1);
     fChain->SetBranchStatus("pf*", 1);
 

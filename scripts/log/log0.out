@@ -1,0 +1,140 @@
+WARNING: There is already a revert env for this module, please unload first
+WARNING: There is already a revert env for this module, please unload first
+/scratch/condor/execute/dir_722
+Have 5 arguments:
+runTtbarDilepton5TeV
+ExampleAnalysisParameters_cfg.py
+1
+ExampleAnalysisParameters_cfg.py
+1@
+/storage/data/cms/store/user/gkrintir/TopHI/HighPtLowerPhotons_Run2015E-PromptReco-v1_v1/HighPtLowerPhotons/crab_TopHI/160111_200108/0000/HiForestAOD_merged.root
+1000101
+firstFile: 0  lastFile: 1
+firstEvent: 0
+isData: 1
+hltTree done
+hiTree done
+skimTree done
+pfTree done
+muTree done
+pfJetTree done
+14014329
+nentries: 100  tot: 14014329
+Processing event 0  100
+Created hiEventContainer
+ weight -1.000000
+0 fCurrent: 0
+0 fCurrent: 0
+mpika!!!! lwElectronsGene
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+ weight -1.000000
+Collection name='TList', class='TList', size=11
+ OBJ: hiEventContainer	hiEventContainer	hiEventContainer
+ Collection name='lwMuonsReco', class='TClonesArray', size=1000
+ Collection name='lwMuonsGene', class='TClonesArray', size=1000
+ Collection name='lwElectronsReco', class='TClonesArray', size=1000
+ Collection name='lwElectronsGene', class='TClonesArray', size=1000
+ Collection name='pfParticles', class='TClonesArray', size=1000
+ OBJ: lwJetContainer	akt4PF	akt4PF
+ OBJ: lwJetContainer	akt4Gen	akt4Gen
+ Collection name='TClonesArray', class='TClonesArray', size=1000
+ Collection name='TClonesArray', class='TClonesArray', size=1000
+ Collection name='TClonesArray', class='TClonesArray', size=1000
+Results have been stored in AnaResults.root

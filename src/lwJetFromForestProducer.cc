@@ -16,6 +16,8 @@ inputBase("lwJetFromForestProducer"),
   flwGenJetContName("flwGenJetCont"),
   flwGenJetContainer(0x0),
   fForestJets(),
+  fPtMin(20.),
+  fMaxEtaAbs(2.5),
   fRadius(-1.),
   fDoPFJetID(false)
 {
@@ -25,11 +27,13 @@ inputBase("lwJetFromForestProducer"),
 //__________________________________________________________
 lwJetFromForestProducer::lwJetFromForestProducer(const char *name) :
   inputBase(name),
-  flwJetContName("flwJetCont"),
+  flwJetContName(""),
   flwJetContainer(0x0),
-  flwGenJetContName("flwGenJetCont"),
+  flwGenJetContName(""),
   flwGenJetContainer(0x0),
   fForestJets(),
+  fPtMin(20.),
+  fMaxEtaAbs(2.5),
   fRadius(-1.),
   fDoPFJetID(false)
 {
@@ -112,6 +116,7 @@ Bool_t lwJetFromForestProducer::Init() {
     if (fChain->GetBranch("muN"))
       fChain->SetBranchAddress("muN", &fForestJets.muN, &fForestJets.b_muN);
     fChain->SetBranchStatus("discr_*",1);
+    //Old version of trees
     if (fChain->GetBranch("discr_ssvHighEff"))
       fChain->SetBranchAddress("discr_ssvHighEff", &fForestJets.discr_ssvHighEff, &fForestJets.b_discr_ssvHighEff);
     if (fChain->GetBranch("discr_ssvHighPur"))
@@ -124,6 +129,11 @@ Bool_t lwJetFromForestProducer::Init() {
       fChain->SetBranchAddress("refparton_flavor", &fForestJets.refparton_flavor, &fForestJets.b_refparton_flavor);
     if (fChain->GetBranch("refparton_flavorForB"))
       fChain->SetBranchAddress("refparton_flavorForB", &fForestJets.refparton_flavorForB, &fForestJets.b_refparton_flavorForB);
+    //New version of trees
+    if (fChain->GetBranch("discr_csvV1"))
+      fChain->SetBranchAddress("discr_csvV1", &fForestJets.discr_csvV1, &fForestJets.b_discr_csvV1);
+    if (fChain->GetBranch("discr_csvV2")){
+      fChain->SetBranchAddress("discr_csvV2", &fForestJets.discr_csvV2, &fForestJets.b_discr_csvV2);}
     fChain->SetBranchStatus("ngen",1);
     fChain->SetBranchStatus("gen*",1);
     if (fChain->GetBranch("ngen"))
@@ -202,12 +212,13 @@ Bool_t lwJetFromForestProducer::Run(Long64_t entry) {
     jet->SetRefToParton(fForestJets.refparton_flavor[i]);
     jet->SetRefToPartonForB(fForestJets.refparton_flavorForB[i]);
     jet->SetCsvSimpleDiscr(fForestJets.discr_csvSimple[i]);
+    jet->SetCsvV1Discr(fForestJets.discr_csvV1[i]);
+    jet->SetCsvV2Discr(fForestJets.discr_csvV2[i]);
     jet->SetRawPt(fForestJets.rawpt[i]);
     jet->SetRefPt(fForestJets.refpt[i]);
     jet->SetRefEta(fForestJets.refeta[i]);
     jet->SetRefM(fForestJets.refm[i]);
     jet->SetRefDr(fForestJets.refdrjt[i]);
-    jet->SetCsvSimpleDiscr(fForestJets.discr_csvSimple[i]);
     jet->SetSubEvent(fForestJets.subid[i]);
     jet->SetChargedProp(fForestJets.chargedMax[i],fForestJets.chargedSum[i],fForestJets.chargedN[i]);
     jet->SetChargedHardProp(fForestJets.chargedMax[i],fForestJets.chargedHardSum[i],fForestJets.chargedHardN[i]);
@@ -273,6 +284,9 @@ Long64_t lwJetFromForestProducer::LoadTree(Long64_t entry) {
 
 //__________________________________________________________
 bool lwJetFromForestProducer::IsGoodPFJet(int i) const {
+  
+  if(fForestJets.jtpt[i] < fPtMin ) return false;
+  if(abs(fForestJets.jteta[i]) > fMaxEtaAbs ) return false;
   //pf jet selection (https://twiki.cern.ch/twiki/bin/view/CMS/JetID)
   int nconst = fForestJets.chargedN[i]+fForestJets.photonN[i]+fForestJets.neutralN[i]+fForestJets.eN[i]+fForestJets.muN[i];
   if(abs(fForestJets.jteta[i])<=3.) {

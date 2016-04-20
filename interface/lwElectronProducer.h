@@ -27,6 +27,10 @@ class lwElectronProducer : public inputBase {
   void     SetlwElectronsRecoName(TString n) { flwElectronsRecoName = n; }
   void     SetlwElectronsGeneName(TString n) { flwElectronsGeneName = n; }
 
+  void     SetVetoId (int id) {fVetoId = id; }
+  void     SetLooseId (int id) {fLooseId = id ; }
+  void     SetMediumId (int id) {fMediumId = id; }
+  void     SetTightId (int id) {fTightId = id; }
   void     SetEtaCut(float eta) {fMaxEtaAbs = eta; }
   void     SetPtCut(float pt) {fPtMin = pt; }
   void     SetdEtaCuts(float b, float e) {fMaxdEtaAtVtxBarrel = b; fMaxdEtaAtVtxEndcap = e; }
@@ -38,7 +42,8 @@ class lwElectronProducer : public inputBase {
   void     SetEoverPInvCuts(float b, float e) {fMaxEoverPInvBarrel = b; fMaxEoverPInvEndcap = e; }
   void     SetMissHitsCuts(int b, int e) {fMaxMissHitsBarrel = b; fMaxMissHitsEndcap = e; }
   void     SetPassConversionVetoCuts(bool b, bool e) {fPassConversionVetoBarrel = b; fPassConversionVetoEndcap = e; }
-
+  void     SetPFIso(float b, float e) {fPFIsoBarrel = b; fPFIsoEndcap = e;}
+  
   
   const char* GetlwElectronsRecoName() const { return flwElectronsRecoName.Data() ; }
   const char* GetlwElectronsGeneName() const { return flwElectronsGeneName.Data() ; }
@@ -53,7 +58,11 @@ class lwElectronProducer : public inputBase {
   ForestElectrons              fElectrons;          //! Electrons in forest tree
   Float_t                      fPtMin;          // minimum pT
   Float_t                      fMaxEtaAbs;      // max eta
-  
+  Int_t                        fVetoId;
+  Int_t                        fLooseId;
+  Int_t                        fMediumId;
+  Int_t                        fTightId;
+
   Float_t                      fMaxdEtaAtVtxBarrel;   // Please add description!
   Float_t                      fMaxdPhiAtVtxBarrel;   // 
   Float_t                      fMaxSigmaIEtaIEtaBarrel;
@@ -62,7 +71,8 @@ class lwElectronProducer : public inputBase {
   Float_t                      fMaxDzBarrel;        //
   Float_t                      fMaxEoverPInvBarrel;  // 
   Int_t                        fMaxMissHitsBarrel;   // 
-  Bool_t                       fPassConversionVetoBarrel;  // 
+  Int_t                        fPassConversionVetoBarrel;  // 
+  Float_t                      fPFIsoBarrel;
 
   Float_t                      fMaxdEtaAtVtxEndcap;   // 
   Float_t                      fMaxdPhiAtVtxEndcap;   // 
@@ -72,8 +82,8 @@ class lwElectronProducer : public inputBase {
   Float_t                      fMaxDzEndcap;        // 
   Float_t                      fMaxEoverPInvEndcap;  // 
   Int_t                        fMaxMissHitsEndcap;   // 
-  Bool_t                       fPassConversionVetoEndcap;  // 
-
+  Int_t                        fPassConversionVetoEndcap;  // 
+  Float_t                      fPFIsoEndcap;
   
  private:
   lwElectronProducer(const lwElectronProducer& obj); // copy constructor

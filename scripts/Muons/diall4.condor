@@ -1,0 +1,26 @@
+executable = runJob_1.sh 
+universe = vanilla 
+requirements   = (CMSFARM =?= TRUE) 
+output = log/log$(Process).out 
+error = log/log$(Process).error  
+log = log/log$(Process).log 
+should_transfer_files = YES 
+when_to_transfer_output = ON_EXIT 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1128 1140 95
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1140 1152 96
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1152 1164 97
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1164 1176 98
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1176 1188 99
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1188 1200 100
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1200 1212 101
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1212 1224 102
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Muons/ExampleAnalysisParameters_cfg.py 1 1224 1232 103
+queue 

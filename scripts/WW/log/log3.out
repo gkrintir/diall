@@ -1,0 +1,48 @@
+WARNING: There is already a revert env for this module, please unload first
+WARNING: There is already a revert env for this module, please unload first
+/scratch/condor/execute/dir_53789
+Number of arguments in the batch job: 5
+1st argument: /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WW/ExampleAnalysisParameters_cfg.py
+2nd argument: 1
+Have 5 arguments:
+runTtbarDilepton5TeV
+/home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WW/ExampleAnalysisParameters_cfg.py
+1
+3
+4
+/storage/data/cms/store/user/gkrintir/TopHI/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg_HINppWinter16DR-75X_mcRun2_asymptotic_ppAt5TeV_v3-v1_v1/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg/crab_TopHI/160325_175725/0000/HiForestAOD_1.root
+/storage/data/cms/store/user/gkrintir/TopHI/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg_HINppWinter16DR-75X_mcRun2_asymptotic_ppAt5TeV_v3-v1_v1/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg/crab_TopHI/160325_175725/0000/HiForestAOD_2.root
+/storage/data/cms/store/user/gkrintir/TopHI/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg_HINppWinter16DR-75X_mcRun2_asymptotic_ppAt5TeV_v3-v1_v1/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg/crab_TopHI/160325_175725/0000/HiForestAOD_3.root
+/storage/data/cms/store/user/gkrintir/TopHI/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg_HINppWinter16DR-75X_mcRun2_asymptotic_ppAt5TeV_v3-v1_v1/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg/crab_TopHI/160325_175725/0000/HiForestAOD_4.root
+/storage/data/cms/store/user/gkrintir/TopHI/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg_HINppWinter16DR-75X_mcRun2_asymptotic_ppAt5TeV_v3-v1_v1/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg/crab_TopHI/160325_175725/0000/HiForestAOD_5.root
+/storage/data/cms/store/user/gkrintir/TopHI/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg_HINppWinter16DR-75X_mcRun2_asymptotic_ppAt5TeV_v3-v1_v1/WWTo2L2Nu_TuneCUETP8M1_5020GeV-powheg/crab_TopHI/160325_175725/0000/HiForestAOD_6.root
+-13401
+firstFile: 3  lastFile: 4
+firstEvent: 0
+isData: 1
+hltTree done
+hiTree done
+skimTree done
+pfTree done
+muTree done
+pfJetTree done
+1900
+nentries: -1  tot: 1900
+Processing event 0  1900
+Created hiEventContainer
+Created triggerMap object
+0 fCurrent: 0
+0 fCurrent: 0
+pfPartProd: 0 fCurrent: 0
+Collection name='TList', class='TList', size=10
+ OBJ: hiEventContainer	hiEventContainer	hiEventContainer
+ OBJ: triggerMap	triggerMap	triggerMap
+ Collection name='lwMuonsReco', class='TClonesArray', size=1000
+ Collection name='lwElectronsReco', class='TClonesArray', size=1000
+ Collection name='lwElectronsGene', class='TClonesArray', size=1000
+ Collection name='pfParticles', class='TClonesArray', size=1000
+ OBJ: lwJetContainer	akt4PF	akt4PF
+ Collection name='TClonesArray', class='TClonesArray', size=1000
+ Collection name='TClonesArray', class='TClonesArray', size=1000
+ Collection name='TClonesArray', class='TClonesArray', size=1000
+Results have been stored in AnaResults.root

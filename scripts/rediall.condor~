@@ -1,0 +1,8 @@
+executable = runJob_1.sh
+universe = vanilla
+requirements   = (CMSFARM =?= TRUE)
+output = log/log$(Process).out
+error = log/log$(Process).error
+log = log/log$(Process).log
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT

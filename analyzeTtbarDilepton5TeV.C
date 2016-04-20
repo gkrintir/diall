@@ -1,7 +1,8 @@
 #include "UserCode/diall/interface/hiEventProducer.h"
 #include "UserCode/diall/interface/lwMuonProducer.h"
 #include "UserCode/diall/interface/lwElectronProducer.h"
-#include "UserCode/diall/interface/pfParticleProducer.h"
+//#include "UserCode/diall/interface/pfParticleProducer.h"
+#include "UserCode/diall/interface/pfParticleProducerVector.h"
 #include "UserCode/diall/interface/lwJetContainer.h"
 #include "UserCode/diall/interface/lwJetFromForestProducer.h"
 #include "UserCode/diall/interface/triggerProducer.h"
@@ -25,7 +26,12 @@
 
 using namespace std;
 
-void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname = "AnaResults.root", Long64_t nentries = 20, Int_t firstF = -1, Int_t lastF = -1, Int_t firstEvent = 0, int isData = 1) {
+void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname = "AnaResults.root", Long64_t nentries = 20, Int_t firstF = -1, Int_t lastF = -1, Int_t firstEvent = 0, int isData = 1,
+			      TString triggerPath = "",
+			      float muonPtCut = 18., float muonEtaCut = 2.5,
+			      float electronPtCut = 20. , float electronEtaCut = 2.5, int electronVetoID = 0, int electronLooseID = 1, int electronMediumID = 0, int electronTightID = 0,
+			      float jetPtCut = 20., float jetEtaCut = 4.7,
+			      float dilepMassCut = 20., int dilepSign = -1, float metCut = 30.) {
 
 
   
@@ -52,7 +58,6 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   for(size_t i=firstFile; i<lastFile; i++) chain->Add(urls[i].c_str());
   Printf("hltTree done");
 
-
   TChain *hiEvtTree = new TChain("hltanalysis/HltTree");
   for(size_t i=firstFile; i<lastFile; i++) hiEvtTree->Add(urls[i].c_str());
   chain->AddFriend(hiEvtTree);
@@ -61,7 +66,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
 
   TChain *skimTree = new TChain("skimanalysis/HltTree");
   for(size_t i=firstFile; i<lastFile; i++) skimTree->Add(urls[i].c_str());
-  chain->AddFriend(skimTree);
+   chain->AddFriend(skimTree);
   Printf("skimTree done");
 
   TChain *pfTree = new TChain("pfcandAnalyzer/pfTree");
@@ -78,7 +83,6 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   for(size_t i=firstFile; i<lastFile; i++) pfJetTree->Add(urls[i].c_str());
   chain->AddFriend(pfJetTree);
   Printf("pfJetTree done");
-
   
   // TChain *genTree = new TChain("HiGenParticleAna/hi");
   // for(size_t i=firstFile; i<lastFile; i++) genTree->Add(urls[i].c_str());
@@ -95,13 +99,21 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   p_evt->SetInput(chain);
   p_evt->SetHIEventContName("hiEventContainer");
   p_evt->SetEventObjects(fEventObjects);
-
-  triggerProducer *p_trg = new triggerProducer("trigProd");
-  p_trg->SetInput(hiEvtTree);
-  p_trg->SetTriggerMapName("triggerMap");
-  p_trg->SetEventObjects(fEventObjects);
   
+  triggerProducer *p_trg = new triggerProducer("trigProd");
+  p_trg->SetInput(chain);
+  p_trg->SetTriggerMapName("triggerMap");
+  p_trg->SetTriggerPath(triggerPath);//HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
+  p_trg->SetEventObjects(fEventObjects);
+
+  /*
   pfParticleProducer *p_pf = new pfParticleProducer("pfPartProd");
+  p_pf->SetInput(chain);
+  p_pf->SetpfParticlesName("pfParticles");
+  p_pf->SetEventObjects(fEventObjects);
+  */
+
+  pfParticleProducerVector *p_pf = new pfParticleProducerVector("pfPartProd");
   p_pf->SetInput(chain);
   p_pf->SetpfParticlesName("pfParticles");
   p_pf->SetEventObjects(fEventObjects);
@@ -109,72 +121,93 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
   lwMuonProducer *p_mu = new lwMuonProducer("lwMuonProd");
   p_mu->SetInput(chain);
   p_mu->SetlwMuonsRecoName("lwMuonsReco");
-  p_mu->SetlwMuonsGeneName("lwMuonsGene");
+  if (!isData) p_mu->SetlwMuonsGeneName("lwMuonsGene");
+  p_mu->SetEtaCut(muonEtaCut);
+  p_mu->SetPtCut(muonPtCut);
   p_mu->SetEventObjects(fEventObjects);
 
   lwElectronProducer *p_ele = new lwElectronProducer("lwElectronProd");
   p_ele->SetInput(chain);
   p_ele->SetlwElectronsRecoName("lwElectronsReco");
-  //p_ele->SetlwElectronsGeneName("lwElectronsGene");
+  p_ele->SetlwElectronsGeneName("lwElectronsGene");
+  p_ele->SetVetoId(electronVetoID);
+  p_ele->SetLooseId(electronLooseID);
+  p_ele->SetMediumId(electronMediumID);
+  p_ele->SetTightId(electronTightID);
+  p_ele->SetEtaCut(electronEtaCut);
+  p_ele->SetPtCut(electronPtCut);
   p_ele->SetEventObjects(fEventObjects);
-
+  
 
   lwJetFromForestProducer *p_pfJet = new lwJetFromForestProducer("lwJetForestProdPF");
   p_pfJet->SetInput(chain);
   p_pfJet->SetJetContName("akt4PF");
   p_pfJet->DoPFJetID(true);
-  p_pfJet->SetGenJetContName("akt4Gen");
+  if(!isData) p_pfJet->SetGenJetContName("akt4Gen");
+  p_pfJet->SetEtaCut(jetEtaCut);
+  p_pfJet->SetEtaCut(jetPtCut);
   p_pfJet->SetEventObjects(fEventObjects);
   p_pfJet->SetRadius(0.4);
-  
+
   //---------------------------------------------------------------
   //analysis modules
   //
-
+  
   //handler to which all modules will be added
   anaBaseTask *handler = new anaBaseTask("handler","handler");
-
   
   anaTtbarDilepton *anaEMu = new anaTtbarDilepton("anaEMu","anaEMu");
   anaEMu->ConnectEventObject(fEventObjects);
   anaEMu->SetHiEvtName("hiEventContainer");
-  //anaEMu->SetTriggerMapName("triggerMap");
+  anaEMu->SetTriggerMapName("triggerMap");
+  anaEMu->SetTriggerPath(triggerPath);//HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
   anaEMu->SetParticlesName("pfParticles");
   anaEMu->SetRecoLeptonLeadName("lwElectronsReco");
   anaEMu->SetRecoLeptonSubleadName("lwMuonsReco");
-  anaEMu->SetGenLeptonName("lwMuonsGene");
+  if(!isData) anaEMu->SetGenLeptonName("lwMuonsGene");
   anaEMu->SetRecoJetsName("akt4PF");
-  anaEMu->SetGenJetsName("akt4Gen");
-  //anaEMu->SetMetType(anaTtbarDilepton::kPFRaw);
+  if(!isData) anaEMu->SetGenJetsName("akt4Gen");
+  anaEMu->SetMetType(anaTtbarDilepton::kPFRaw);
+  anaEMu->SetMinDilepMass(dilepMassCut);
+  anaEMu->SetDileptonChargeSign(dilepSign);
+  anaEMu->SetMinMET(metCut);
   handler->Add(anaEMu);
 
   anaTtbarDilepton *anaMuMu = new anaTtbarDilepton("anaMuMu","anaMuMu");
   anaMuMu->ConnectEventObject(fEventObjects);
   anaMuMu->SetHiEvtName("hiEventContainer");
-  //anaMuMu->SetTriggerMapName("triggerMap");
+  anaMuMu->SetTriggerMapName("triggerMap");
+  anaMuMu->SetTriggerPath(triggerPath);//HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
   anaMuMu->SetParticlesName("pfParticles");
   anaMuMu->SetRecoLeptonLeadName("lwMuonsReco");
   anaMuMu->SetRecoLeptonSubleadName("lwMuonsReco");
-  anaMuMu->SetGenLeptonName("lwMuonsGene");
+  if(!isData) anaMuMu->SetGenLeptonName("lwMuonsGene");
   anaMuMu->SetRecoJetsName("akt4PF");
-  anaMuMu->SetGenJetsName("akt4Gen");
-  //anaMuMu->SetMetType(anaTtbarDilepton::kPFRaw);
+  if(!isData) anaMuMu->SetGenJetsName("akt4Gen");
+  anaMuMu->SetMetType(anaTtbarDilepton::kPFRaw);
+  anaMuMu->SetMinDilepMass(dilepMassCut);
+  anaMuMu->SetDileptonChargeSign(dilepSign);
+  anaMuMu->SetMinMET(metCut);
   handler->Add(anaMuMu);
   
   anaTtbarDilepton *anaEleEle = new anaTtbarDilepton("anaEleEle","anaEleEle");
   anaEleEle->ConnectEventObject(fEventObjects);
   anaEleEle->SetHiEvtName("hiEventContainer");
-  //anaEleEle->SetTriggerMapName("triggerMap");
+  anaEleEle->SetTriggerMapName("triggerMap");
+  anaEleEle->SetTriggerPath(triggerPath);//HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9Cut_v1");
   anaEleEle->SetParticlesName("pfParticles");
   anaEleEle->SetRecoLeptonLeadName("lwElectronsReco");
   anaEleEle->SetRecoLeptonSubleadName("lwElectronsReco");
-  anaEleEle->SetGenLeptonName("lwMuonsGene");
+  if(!isData) anaEleEle->SetGenLeptonName("lwMuonsGene");
   anaEleEle->SetRecoJetsName("akt4PF");
-  anaEleEle->SetGenJetsName("akt4Gen");
-  //anaEleEle->SetMetType(anaTtbarDilepton::kPFRaw);
+  if(!isData) anaEleEle->SetGenJetsName("akt4Gen");
+  anaEleEle->SetMetType(anaTtbarDilepton::kPFRaw);
+  anaEleEle->SetMinDilepMass(dilepMassCut);
+  anaEleEle->SetDileptonChargeSign(dilepSign);
+  anaEleEle->SetMinMET(metCut);
+
   handler->Add(anaEleEle);
   
-
   /*
   //PF-GEN matching
   anaJetMatching *matchingGenPFJet = new anaJetMatching("matchingGenPFJet","matchingGenPFJet");
@@ -212,7 +245,7 @@ void analyzeTtbarDilepton5TeV(std::vector<std::string> urls, const char *outname
     // Printf("produce hiEvent");
     if(!p_evt->Run(jentry));   //hi event properties
 
-    //if(!p_trg->Run(jentry));
+    if(!p_trg->Run(jentry));
     if(!p_mu->Run(jentry)); //lepton collection
     if(!p_ele->Run(jentry)); //lepton collection
     if(!p_pf->Run(jentry));    //pf particles

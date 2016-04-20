@@ -1,6 +1,6 @@
 #include "UserCode/diall/analyzeZJetMCResponse.C"
 
-#include "FWCore/FWLite/interface/AutoLibraryLoader.h"
+#include "FWCore/FWLite/interface/FWLiteEnabler.h"
 #include "FWCore/PythonParameterSet/interface/MakeParameterSets.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 {
   // load framework libraries
   gSystem->Load( "libFWCoreFWLite" );
-  AutoLibraryLoader::enable();
+  FWLiteEnabler::enable();
   
   //check arguments
   if ( argc < 2 ) 
@@ -26,21 +26,33 @@ int main(int argc, char* argv[])
       return 0;
     }
 
-  // int anaFile = 1;
+  // int anaFile = 1
   int firstFile = 0;
   int lastFile  = 1;
-  if(argc>2) {
-    firstFile = atoi(argv[2]);
-    lastFile = atoi(argv[3]);
-  }
-
   Int_t firstEvent = 0;
-  if(argc>3)
-    firstEvent = atoi(argv[4]);
+  int isData = 1;
   
   std::cout << "Have " << argc << " arguments:" << std::endl;
   for (int i = 0; i < argc; ++i) {
     std::cout << argv[i] << std::endl;
+    switch(argc)
+      {
+      
+      case 3: 
+	isData = atoi(argv[2]);
+	break;
+      case 5:
+        isData = atoi(argv[2]);
+        firstFile = atoi(argv[3]);
+        lastFile = atoi(argv[4]);
+        break;
+      case 6:
+	isData = atoi(argv[2]);
+	firstFile = atoi(argv[3]);
+	lastFile = atoi(argv[4]);
+	firstEvent = atoi(argv[5]);
+	break;
+      }
   }
   
   // read configuration
@@ -54,7 +66,7 @@ int main(int argc, char* argv[])
   // std::string outname = runProcess.getParameter<std::string>("output");
   int maxEvts = runProcess.getParameter<int>("maxEvents");
    
-  analyzeZJetMCResponse(urls,outname.c_str(),maxEvts,firstFile,lastFile,firstEvent);
+  analyzeZJetMCResponse(urls,outname.c_str(),maxEvts,firstFile,lastFile,firstEvent,isData);
   
   cout << "Results have been stored in " << outname << endl;
 }

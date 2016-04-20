@@ -1,0 +1,1 @@
+/storage/data/cms/store/user/gkrintir/TopHI/DYJetsToLL_TuneCUETP8M1_5020GeV-amcatnloFXFX-pythia8_HINppWinter16DR-75X_mcRun2_asymptotic_ppAt5TeV_v3-v1_v1/DYJetsToLL_TuneCUETP8M1_5020GeV-amcatnloFXFX-pythia8/crab_TopHI/160317_221000/0000/HiForestAOD_1.root

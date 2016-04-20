@@ -1,0 +1,17 @@
+
+#!/bin/bash
+root -l -b -q stack_Approval.cpp'("fNJetsIncl", "anaMuMu", 15, -0.5, 14.5, "")'
+root -l -b -q stack_Approval.cpp'("fNBJetsIncl","anaMuMu", 9, -0.5, 8.5, "")'
+root -l -b -q stack_Approval.cpp'("fMassDilepton","anaMuMu", 50, 20, 200, "")'
+root -l -b -q stack_Approval.cpp'("fLeadJetPt","anaMuMu", 50, 20, 200, "")'
+root -l -b -q stack_Approval.cpp'("fLeadRecoLeptonPt","anaMuMu", 50, 20, 200, "")'
+root -l -b -q stack_Approval.cpp'("fLeadRecoLeptonAbsEta","anaMuMu", 5, 0, 5, "")'
+root -l -b -q stack_Approval.cpp'("fLeadRecoLeptonEta","anaMuMu", 10, -5, 5, "")'
+root -l -b -q stack_Approval.cpp'("fNJets", "anaMuMu", 15, -0.5, 14.5, "")'
+root -l -b -q stack_Approval.cpp'("fDeltaPhi_Rec2jets", "anaMuMu", 10, 0, 1, "")'
+root -l -b -q stack_Approval.cpp'("fMassDilepton_Rec2jets","anaMuMu", 50, 20, 200, "")'
+root -l -b -q stack_Approval.cpp'("fLeadJetPt_Rec2jets","anaMuMu", 50, 20, 200, "")'
+root -l -b -q stack_Approval.cpp'("fLeadJetAbsEta_Rec2jets","anaMuMu", 5, 0, 5, "")'
+root -l -b -q stack_Approval.cpp'("fLeadRecoLeptonPt_Rec2jets","anaMuMu", 50, 20, 200, "")'
+root -l -b -q stack_Approval.cpp'("fLeadRecoLeptonAbsEta_Rec2jets","anaMuMu", 5, 0, 5, "")'
+root -l -b -q stack_Approval.cpp'("fLeadRecoLeptonEta_Rec2jets","anaMuMu", 10, -5, 5, "")'

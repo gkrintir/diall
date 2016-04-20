@@ -1,0 +1,11 @@
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<const int,int> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<const std::string,int> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<const string,int> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<double,double> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<float,float> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<int,double> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<int,int> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<std::string,int> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<string,double> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<string,float> found in libCore.so  is already in libDataFormatsStdDictionaries.so 
+Warning in <TInterpreter::ReadRootmapFile>: class  pair<string,int> found in libCore.so  is already in libDataFormatsStdDictionaries.so 

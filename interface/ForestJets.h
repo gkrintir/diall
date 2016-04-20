@@ -54,6 +54,8 @@ public :
    Float_t         discr_ssvHighPur[maxJets];   //[nref]
    Float_t         discr_csvMva[maxJets];   //[nref]
    Float_t         discr_csvSimple[maxJets];   //[nref]
+   Float_t         discr_csvV1[maxJets];   //[nref]
+   Float_t         discr_csvV2[maxJets];   //[nref]
    
    Float_t         matchedPt[maxJets];   //[nref]
    Float_t         matchedR[maxJets];   //[nref]
@@ -137,6 +139,8 @@ public :
    TBranch        *b_discr_ssvHighPur;   //!
    TBranch        *b_discr_csvMva;       //!
    TBranch        *b_discr_csvSimple;    //!
+   TBranch        *b_discr_csvV1;    //!
+   TBranch        *b_discr_csvV2;    //!
    
    TBranch        *b_matchedPt;   //!
    TBranch        *b_matchedR;   //!

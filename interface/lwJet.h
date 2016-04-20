@@ -35,6 +35,8 @@ class lwJet : public particleBase {
   Int_t       GetRefParton()            const { return fRefParton      ; }
   Int_t       GetRefPartonForB()        const { return fRefPartonForB  ; }
   Float_t     GetCsvSimpleDiscr()       const { return fCsvSimpleDiscr ; }
+  Float_t     GetCsvV1Discr()           const { return fCsvV1Discr ; }
+  Float_t     GetCsvV2Discr()           const { return fCsvV2Discr ; }
   Float_t       GetChargedSum()           const { return fChargedSum; }
   Float_t       GetChargedMax()           const { return fChargedMax; }
   Int_t         GetChargedN()             const { return fChargedN;   }
@@ -67,6 +69,9 @@ class lwJet : public particleBase {
   void        SetRefToParton(Int_t i)      { fRefParton = i;}
   void        SetRefToPartonForB(Int_t i)  { fRefPartonForB = i; }
   void        SetCsvSimpleDiscr(Float_t d) { fCsvSimpleDiscr = d;}
+  void        SetCsvV1Discr(Float_t d)     { fCsvV1Discr = d;}
+  void        SetCsvV2Discr(Float_t d)     { fCsvV2Discr = d;}
+
 
   void        SetChargedProp(Float_t max, Float_t sum, Int_t n);
   void        SetChargedHardProp(Float_t max, Float_t sum, Int_t n);
@@ -77,10 +82,12 @@ class lwJet : public particleBase {
   
  protected:
   Double_t          fArea;          //jet area
-  std::vector<Int_t>  fConstIds;      //ids of constituents
+  std::vector<Int_t>  fConstIds;    //ids of constituents
   Int_t             fRefParton;     //ref to parton
   Int_t             fRefPartonForB; //ref to parton for b
   Float_t           fCsvSimpleDiscr;//csv simple b-jet discriminator
+  Float_t           fCsvV1Discr;    //csv simple b-jet discrimina
+  Float_t           fCsvV2Discr;    //csv simple b-jet discrimina
 
   float             fRawPt;         //raw pt (no jec)
   float             fRawM;          //raw mass (no jec)

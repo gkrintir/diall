@@ -1,0 +1,242 @@
+executable = runJobSS_1.sh 
+universe = vanilla 
+requirements   = (CMSFARM =?= TRUE) 
+output = log/log$(Process).out 
+error = log/log$(Process).error  
+log = log/log$(Process).log 
+should_transfer_files = YES 
+when_to_transfer_output = ON_EXIT 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 0 1 1
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 1 2 2
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 2 3 3
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 3 4 4
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 4 5 5
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 5 6 6
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 6 7 7
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 7 8 8
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 8 9 9
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 9 10 10
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 10 11 11
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 11 12 12
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 12 13 13
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 13 14 14
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 14 15 15
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 15 16 16
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 16 17 17
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 17 18 18
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 18 19 19
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 19 20 20
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 20 21 21
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 21 22 22
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 22 23 23
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 23 24 24
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 24 25 25
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 25 26 26
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 26 27 27
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 27 28 28
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 28 29 29
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 29 30 30
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 30 31 31
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 31 32 32
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 32 33 33
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 33 34 34
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 34 35 35
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 35 36 36
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 36 37 37
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 37 38 38
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 38 39 39
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 39 40 40
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 40 41 41
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 41 42 42
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 42 43 43
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 43 44 44
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 44 45 45
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 45 46 46
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 46 47 47
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 47 48 48
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 48 49 49
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 49 50 50
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 50 51 51
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 51 52 52
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 52 53 53
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 53 54 54
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 54 55 55
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 55 56 56
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 56 57 57
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 57 58 58
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 58 59 59
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 59 60 60
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 60 61 61
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 61 62 62
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 62 63 63
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 63 64 64
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 64 65 65
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 65 66 66
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 66 67 67
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 67 68 68
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 68 69 69
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 69 70 70
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 70 71 71
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 71 72 72
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 72 73 73
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 73 74 74
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 74 75 75
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 75 76 76
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 76 77 77
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 77 78 78
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 78 79 79
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 79 80 80
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 80 81 81
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 81 82 82
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 82 83 83
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 83 84 84
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 84 85 85
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 85 86 86
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 86 87 87
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 87 88 88
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 88 89 89
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 89 90 90
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 90 91 91
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 91 92 92
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 92 93 93
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 93 94 94
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 94 95 95
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 95 96 96
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 96 97 97
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 97 98 98
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 98 99 99
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 99 100 100
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 100 101 101
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 101 102 102
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 102 103 103
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 103 104 104
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 104 105 105
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 105 106 106
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 106 107 107
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 107 108 108
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 108 109 109
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 109 110 110
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 110 111 111
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 111 112 112
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 112 113 113
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 113 114 114
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 114 115 115
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 115 116 116
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/WJets/ExampleAnalysisParametersSS_cfg.py 1 116 117 117
+queue 

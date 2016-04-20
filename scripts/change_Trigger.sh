@@ -1,0 +1,17 @@
+sed -i 's/HLT_HIL3Mu15ForPPRef_v1/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/g' DY/ExampleAnalysisParameters_cfg.py
+sed -i 's/HLT_HIL3Mu15ForPPRef_v1/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/g' TTbar/ExampleAnalysisParameters_cfg.py
+sed -i 's/HLT_HIL3Mu15ForPPRef_v1/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/g' WJets/ExampleAnalysisParameters_cfg.py
+sed -i 's/HLT_HIL3Mu15ForPPRef_v1/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/g' WW/ExampleAnalysisParameters_cfg.py
+sed -i 's/HLT_HIL3Mu15ForPPRef_v1/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/g' WZ/ExampleAnalysisParameters_cfg.py 
+sed -i 's/HLT_HIL3Mu15ForPPRef_v1/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/g' tW_top/OS/ExampleAnalysisParameters_cfg.py
+sed -i 's/HLT_HIL3Mu15ForPPRef_v1/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/g' tW_antitop/OS/ExampleAnalysisParameters_cfg.py
+
+
+#sed -i 's/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/HLT_HIL3Mu15ForPPRef_v1/g' DY/ExampleAnalysisParameters_cfg.py
+#sed -i 's/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/HLT_HIL3Mu15ForPPRef_v1/g' TTbar/ExampleAnalysisParameters_cfg.py
+#sed -i 's/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/HLT_HIL3Mu15ForPPRef_v1/g' WJets/ExampleAnalysisParameters_cfg.py
+#sed -i 's/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/HLT_HIL3Mu15ForPPRef_v1/g' WW/ExampleAnalysisParameters_cfg.py
+#sed -i 's/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/HLT_HIL3Mu15ForPPRef_v1/g' WZ/ExampleAnalysisParameters_cfg.py
+#sed -i 's/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/HLT_HIL3Mu15ForPPRef_v1/g' tW_top/OS/ExampleAnalysisParameters_cfg.py
+#sed -i 's/HLT_HIDoublePhoton15_Eta2p5_Mass50_1000_R9SigmaHECutForPPRef_v1/HLT_HIL3Mu15ForPPRef_v1/g' tW_antitop/OS/ExampleAnalysisParameters_cfg.py
+

@@ -36,9 +36,9 @@ inputBase("lwMuonProducer"),
 //__________________________________________________________
 lwMuonProducer::lwMuonProducer(const char *name) :
   inputBase(name),
-  flwMuonsRecoName("lwMuonsReco"),
+  flwMuonsRecoName(""),
   flwMuonsReco(0x0),
-  flwMuonsGeneName("lwMuonsGene"),
+  flwMuonsGeneName(""),
   flwMuonsGene(0x0),
   fMuons(),
   fPtMin(18.),
@@ -64,7 +64,7 @@ Bool_t lwMuonProducer::Init() {
   
   if(fInputMode==hiForest) {
     // Gen Info
-    fChain->SetBranchStatus("*", 0);
+    //fChain->SetBranchStatus("*", 0);
     fChain->SetBranchStatus("nMC", 1);
     fChain->SetBranchStatus("mc*", 1);
     if (fChain->GetBranch("nMC"))
@@ -99,7 +99,7 @@ Bool_t lwMuonProducer::Init() {
       fChain->SetBranchAddress("mcGMomPID", &fMuons.Gen_Gmompid, &fMuons.b_Gen_Gmompid);
 
     // Reco Info
-    fChain->SetBranchStatus("*", 0);
+     //fChain->SetBranchStatus("*", 0);
     fChain->SetBranchStatus("nMu", 1);
     fChain->SetBranchStatus("mu*", 1);
     if (fChain->GetBranch("nMu"))
@@ -198,6 +198,11 @@ Bool_t lwMuonProducer::Run(Long64_t entry) {
                             0,
                             i);
     mu->SetCharge(fMuons.Glb_charge->at(i));
+    mu->SetPFChIso(fMuons.Glb_pfChIso->at(i));
+    mu->SetPFPhoIso(fMuons.Glb_pfPhoIso->at(i));
+    mu->SetPFNeuIso(fMuons.Glb_pfNeuIso->at(i));
+    mu->SetPFNeuIso(fMuons.Glb_pfPUIso->at(i));
+
     (*flwMuonsReco)[muCount] = mu;
     ++muCount;
   }
@@ -205,8 +210,9 @@ Bool_t lwMuonProducer::Run(Long64_t entry) {
   //Printf("%d reconstructed muons",muCount);
 
   //generated muons
-  if(flwMuonsGene) {
+  if(flwMuonsGene && !flwMuonsGeneName.IsNull()) {
     muCount = 0;
+    //printf("mnpika gene !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! %s\n", flwMuonsGeneName.Data());
     for(Int_t i = 0; i<fMuons.Gen_nMC; i++) {
       genParticle *mu = new genParticle(fMuons.Gen_pt->at(i),
                                         fMuons.Gen_eta->at(i),

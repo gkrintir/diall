@@ -59,6 +59,10 @@ public :
    std::vector<Float_t>   *eleSCRawEn=0;
    std::vector<Float_t>   *eleSCEtaWidth=0;
    std::vector<Float_t>   *eleSCPhiWidth=0;
+   std::vector<Int_t>     *eleIDVeto=0;
+   std::vector<Int_t>     *eleIDLoose=0;
+   std::vector<Int_t>     *eleIDMedium=0;
+   std::vector<Int_t>     *eleIDTight=0;
    std::vector<Float_t>   *eleHoverE=0;
    std::vector<Float_t>   *eleEoverP=0;
    std::vector<Float_t>   *eleEoverPInv=0;
@@ -80,6 +84,8 @@ public :
    std::vector<Float_t>   *elePFChIso04=0;
    std::vector<Float_t>   *elePFPhoIso04=0;
    std::vector<Float_t>   *elePFNeuIso04=0;
+   std::vector<Int_t>     *elepassConversionVeto=0;
+   std::vector<Float_t>   *eleEffAreaTimesRho=0;
    std::vector<Float_t>   *eleBC1E=0;
    std::vector<Float_t>   *eleBC1Eta=0;
    std::vector<Float_t>   *eleBC2E=0;
@@ -163,6 +169,10 @@ public :
    TBranch        *b_eleEoverP;
    TBranch        *b_eleEoverPInv;
    TBranch        *b_eleBrem;
+   TBranch        *b_eleIDVeto;
+   TBranch        *b_eleIDLoose;
+   TBranch        *b_eleIDMedium;
+   TBranch        *b_eleIDTight;
    TBranch        *b_eledEtaAtVtx;
    TBranch        *b_eledPhiAtVtx;
    TBranch        *b_eleSigmaIEtaIEta;
@@ -180,6 +190,8 @@ public :
    TBranch        *b_elePFChIso04;
    TBranch        *b_elePFPhoIso04;
    TBranch        *b_elePFNeuIso04;
+   TBranch        *b_elepassConversionVeto;
+   TBranch        *b_eleEffAreaTimesRho;
    TBranch        *b_eleBC1E;
    TBranch        *b_eleBC1Eta;
    TBranch        *b_eleBC2E;

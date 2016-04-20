@@ -4,7 +4,7 @@
 
 #include "UserCode/diall/interface/hiEventProducer.h"
 
-#include <ostream>
+#include <iostream>
 using namespace std;
 
 ClassImp(hiEventProducer)
@@ -73,14 +73,19 @@ Bool_t hiEventProducer::Init() {
   if(!inputBase::Init()) return kFALSE;
 
   if(fInputMode==hiForest) {
+    //fChain->SetBranchStatus("*", 0);
+    fChain->SetBranchStatus("weight", 1);
+    fChain->SetBranchStatus("vx", 1);
+    fChain->SetBranchStatus("evt", 1);
+
     if(fChain->GetBranch("run"))
       fChain->SetBranchAddress("run",   &fRun,   &b_run);
     if(fChain->GetBranch("evt"))
-      fChain->SetBranchAddress("evt",   &fEvt,   &b_evt);
+      fChain->SetBranchAddress("evt",   &fEvt);
     if(fChain->GetBranch("lumi"))
       fChain->SetBranchAddress("lumi",  &fLumi,  &b_lumi);
-    if(fChain->GetBranch("weight"))
-      fChain->SetBranchAddress("weight",&fWeight,&b_weight);
+    if(fChain->GetBranch("weight")){ 
+      fChain->SetBranchAddress("weight",&fWeight ); }
     if(fChain->GetBranch("vx"))
       fChain->SetBranchAddress("vx",    &fVx,    &b_vx);
     if(fChain->GetBranch("vy"))
@@ -135,11 +140,13 @@ Bool_t hiEventProducer::Run(Long64_t entry) {
   if(centry<0) return kFALSE;
 
   if(!InitEventObjects()) return kFALSE;
- 
+
+  fChain->GetEntry(entry);
+
   fhiEventContainer->SetRun(fRun);
   fhiEventContainer->SetEvent(fEvt);
   fhiEventContainer->SetLumi(fLumi);
-  fhiEventContainer->SetWeight(fWeight); printf(" weight %f\n", fWeight);
+  fhiEventContainer->SetWeight(fWeight); 
   fhiEventContainer->SetVx(fVx);
   fhiEventContainer->SetVy(fVy);
   fhiEventContainer->SetVz(fVz);
@@ -178,8 +185,7 @@ Long64_t hiEventProducer::LoadTree(Long64_t entry) {
     Printf("hiEventProducer: centry smaller than 0");
     return centry;  
   }
-  
-  fChain->GetEntry(entry);
+
   
   return centry;  
 }

@@ -1,0 +1,13 @@
+executable = runJob_2.sh 
+universe = vanilla 
+requirements   = (CMSFARM =?= TRUE) 
+output = log/log$(Process).out 
+error = log/log$(Process).error  
+log = log/log$(Process).log 
+should_transfer_files = YES 
+when_to_transfer_output = ON_EXIT 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/ExampleAnalysisParameters_cfg.py 1 1200 1212 13
+queue
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/ExampleAnalysisParameters_cfg.py 1 1200 1213 14
+queue
+

@@ -6,7 +6,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include "TSystem.h"
-
+#include "TString.h"
 #include <iostream>
 
 using namespace std;
@@ -62,14 +62,41 @@ int main(int argc, char* argv[])
 
   for (std::vector<std::string>::const_iterator i = urls.begin(); i != urls.end(); ++i)
     std::cout << *i << std::endl;
-  
+
+  //Output
   std::string outname = "AnaResults.root";
   // std::string outname = runProcess.getParameter<std::string>("output");
+  //Events
   int maxEvts = runProcess.getParameter<int>("maxEvents");
-  
+  //Trigger Object
+  TString triggerPath = runProcess.getParameter<string>("triggerPath");
+  //RECO Muon Object
+  float muonPtCut = runProcess.getParameter<double>("muonPtCut");
+  float muonEtaCut = runProcess.getParameter<double>("muonEtaCut");
+  //RECO Electron Object
+  float electronPtCut = runProcess.getParameter<double>("electronPtCut");
+  float electronEtaCut = runProcess.getParameter<double>("electronEtaCut");
+  int electronVetoID = runProcess.getParameter<int>("electronVetoID");
+  int electronLooseID = runProcess.getParameter<int>("electronLooseID");
+  int electronMediumID = runProcess.getParameter<int>("electronMediumID");
+  int electronTightID = runProcess.getParameter<int>("electronTightID");
+  //RECO Jet Object
+  float jetPtCut = runProcess.getParameter<double>("jetPtCut");
+  float jetEtaCut = runProcess.getParameter<double>("jetEtaCut");
+
+  //Analysis Objects
+  float dilepMassCut = runProcess.getParameter<double>("dilepMassCut");
+  int dilepSign = runProcess.getParameter<int>("dilepSign");
+  float metCut = runProcess.getParameter<double>("metCut");
+
   std::cout<< maxEvts<< firstFile << lastFile << firstEvent<< isData<< std::endl;//firstEvent << isData << std::endl;
 
-  analyzeTtbarDilepton5TeV(urls,outname.c_str(),maxEvts,firstFile,lastFile,firstEvent,isData);
+  analyzeTtbarDilepton5TeV(urls,outname.c_str(),maxEvts,firstFile,lastFile,firstEvent,isData,
+			   triggerPath,
+			   muonPtCut, muonEtaCut,
+			   electronPtCut, electronEtaCut, electronVetoID, electronLooseID, electronMediumID, electronTightID, 
+			   jetPtCut, jetEtaCut, 
+			   dilepMassCut, dilepSign, metCut);
   
   cout << "Results have been stored in " << outname << endl;
 

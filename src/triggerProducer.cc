@@ -3,7 +3,7 @@
 //
 
 #include "UserCode/diall/interface/triggerProducer.h"
-
+#include <iostream>
 #include <ostream>
 using namespace std;
 
@@ -70,22 +70,58 @@ Bool_t triggerProducer::Run(Long64_t entry) {
 
   if(!InitEventObjects()) return kFALSE;
 
-  int val[20000] = {0};
-  TBranch *br[20000];
-  TObjArray *objarr = fChain->GetListOfBranches();
-  for(int i = 0; i < objarr->GetEntries(); ++i) {
-    TString str = objarr->At(i)->GetName();
-    //if(!str.Contains("HLT_HIL2Mu15_v1")) continue;
-    //Printf("%s val: %d",str.Data(),val[i]);
-    // TBranch* branch = GetBranch(str.Data());
-    // if(!branch) continue;
-    
-    if(fChain->SetBranchAddress(str.Data(),&val[i],&br[i])<0) continue;
+  Int_t val[680000] = {0};
+  TBranch *br[680000];
+
+  //fChain->SetBranchStatus("*", 0);
+
+  /*
+  fChain->SetBranchStatus("HLT_HIL3Mu15_v1", 1);
+  fChain->SetBranchStatus("HLT_HIL3Mu20_v1", 1);
+  
+  fChain->SetBranchStatus("HLT_HISinglePhoton10_Eta1p5_v1");
+  fChain->SetBranchStatus("HLT_HISinglePhoton10_Eta3p1_v1");
+  fChain->SetBranchStatus("HLT_HISinglePhoton15_Eta1p5_v1");
+  fChain->SetBranchStatus("HLT_HISinglePhoton15_Eta3p1_v1");
+  fChain->SetBranchStatus("HLT_HISinglePhoton20_Eta1p5_v1");
+  fChain->SetBranchStatus("HLT_HISinglePhoton20_Eta3p1_v1");
+  
+  fChain->SetBranchStatus("HLT_HIL3Mu15_v1_Prescl", 1);
+  fChain->SetBranchStatus("HLT_HIL3Mu20_v1_Prescl", 1);
+  
+  fChain->SetBranchStatus("HLT_HISinglePhoton10_Eta1p5_v1_Prescl");
+  fChain->SetBranchStatus("HLT_HISinglePhoton10_Eta3p1_v1_Prescl");
+  fChain->SetBranchStatus("HLT_HISinglePhoton15_Eta1p5_v1_Prescl");
+  fChain->SetBranchStatus("HLT_HISinglePhoton15_Eta3p1_v1_Prescl");
+  fChain->SetBranchStatus("HLT_HISinglePhoton20_Eta1p5_v1_Prescl");
+  fChain->SetBranchStatus("HLT_HISinglePhoton20_Eta3p1_v1_Prescl");
+
+  if (fChain->GetBranch("HLT_HISinglePhoton20_Eta3p1_v1_Prescl"))
+  {
+    fChain->SetBranchAddress("HLT_HISinglePhoton20_Eta3p1_v1_Prescl",&val[entry],&br[entry]);
     fChain->GetEntry(entry);
-    //Printf("%s val: %d",str.Data(),val[i]);
-    fTriggerMap->AddTrigger(str.Data(),val[i]);
+    fTriggerMap->AddTrigger("HLT_HISinglePhoton20_Eta3p1_v1_Prescl", val[entry]);
+
   }
- 
+  */
+  fChain->SetBranchStatus(fTriggerPath.Data());
+  if (fChain->GetBranch(fTriggerPath.Data()))
+    {
+      fChain->SetBranchAddress(fTriggerPath.Data(),&val[entry],&br[entry]);
+      fChain->GetEntry(entry);
+      fTriggerMap->AddTrigger(fTriggerPath.Data(), val[entry]);
+
+    }
+  /*
+  fChain->SetBranchStatus("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9CutForPPRef_v1");
+  if (fChain->GetBranch("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9CutForPPRef_v1"))
+  {
+      fChain->SetBranchAddress("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9CutForPPRef_v1",&val[entry],&br[entry]);
+      fChain->GetEntry(entry);
+      fTriggerMap->AddTrigger("HLT_HIDoublePhoton15_Eta2p1_Mass50_1000_R9CutForPPRef_v1", val[entry]);
+
+  }
+  */
   //fTriggerMap->PrintTriggers();
 
   return kTRUE; 

@@ -1,0 +1,42 @@
+executable = runJob_1.sh 
+universe = vanilla 
+requirements   = (CMSFARM =?= TRUE) 
+output = log/log$(Process).out 
+error = log/log$(Process).error 
+log = log/log$(Process).log 
+should_transfer_files = YES 
+when_to_transfer_output = ON_EXIT 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 348 360 30
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 360 372 31
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 372 384 32
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 396 408 34
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 444 456 38
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 468 480 40
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 492 504 42
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 504 516 43
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 516 528 44
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 636 648 54
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 672 684 57
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 684 696 58
+queue 
+arguments = /home/fynu/gkrintiras/CMSSW_7_5_7_patch2/src/UserCode/diall/scripts/Photons1/resubmit/ExampleAnalysisParameters_cfg.py 1 696 708 59
+queue 
+executable = runJob_1.sh 
+universe = vanilla 
+requirements   = (CMSFARM =?= TRUE) 
+output = log/log$(Process).out 
+error = log/log$(Process).error 
+log = log/log$(Process).log 
+should_transfer_files = YES 
+when_to_transfer_output = ON_EXIT 
